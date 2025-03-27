@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Photos</title>
+</head>
+<body>
+    <h1>Your Photos</h1>
+    
+    <!-- Input for user to enter their ID -->
+    <label for="userId">Enter your User ID:</label>
+    <input type="text" id="userId" placeholder="Enter your user ID" />
+    <button onclick="fetchPhotos()">Fetch Photos</button>
+
+    <div id="photosContainer">
+        <!-- Uploaded photos will be displayed here -->
+    </div>
+
+    <script>
+        async function fetchPhotos() {
+            const userId = document.getElementById('userId').value;
+            if (!userId) {
+                alert('Please enter a User ID');
+                return;
+            }
+
+            const response = await fetch(`/api/photos?userId=${userId}`);
+            if (!response.ok) {
+                alert('Error fetching photos');
+                return;
+            }
+
+            const data = await response.json();
+            const photosContainer = document.getElementById('photosContainer');
+            photosContainer.innerHTML = ''; // Clear any previous photos
+
+            if (data.photos.length === 0) {
+                photosContainer.innerHTML = '<p>No photos uploaded yet!</p>';
+                return;
+            }
+
+            data.photos.forEach((photo) => {
+                const imgElement = document.createElement('img');
+                imgElement.src = photo.photo_url;  // URL of the photo uploaded to Google Cloud
+                imgElement.alt = 'User photo';
+                imgElement.style.width = '200px';
+                imgElement.style.margin = '10px';
+                photosContainer.appendChild(imgElement);
+            });
+        }
+    </script>
+</body>
+</html>
+
