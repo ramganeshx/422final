@@ -141,7 +141,7 @@
                 photoItem.classList.add('photo-item');
 
                 const imgElement = document.createElement('img');
-		imgElement.src = photo.photo_url + "?authuser=1"; // URL of the photo uploaded to Google Cloud
+                imgElement.src = photo.photo_url; // URL of the photo uploaded to Google Cloud
                 imgElement.alt = photo.photo_name;
 
                 const photoName = document.createElement('p');
@@ -152,7 +152,7 @@
                 downloadBtn.textContent = 'Download'; // Text for the download button
                 downloadBtn.classList.add('download-btn');
                 downloadBtn.download = photo.photo_name; // Trigger download with the photo's name as the filename
-		downloadBtn.setAttribute('href', photo.photo_name);
+		downloadBtn.setAttribute('href', photo.photo_url);
                 // No need to target a new tab or window, so we omit the target attribute
 
                 photoItem.appendChild(imgElement);

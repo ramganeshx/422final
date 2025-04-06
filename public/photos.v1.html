@@ -37,35 +37,15 @@
         button:hover {
             background-color: #45a049;
         }
-        .logout-button {
-            background-color: #f44336; /* Red background */
-            margin-top: 10px;
-        }
-        .logout-button:hover {
-            background-color: #e53935; /* Darker red */
-        }
-        .download-btn {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-        .download-btn:hover {
-            background-color: #45a049;
-        }
     </style>
 </head>
 <body>
     <h1>Your Photos</h1>
-
+    
     <!-- Search Bar for filtering photos by name -->
     <div class="search-bar">
         <label for="search">Search photos by name:</label>
-        <input type="text" id="search" placeholder="Enter photo name" oninput="searchPhotos()">
+        <input type="text" id="search" placeholder="Enter photo name" oninput="filterPhotos()">
     </div>
 
     <!-- Display Username -->
@@ -77,11 +57,6 @@
         <!-- Uploaded photos will be displayed here -->
     </div>
 
-    <!-- Logout Button -->
-    <div>
-        <button class="logout-button" onclick="logout()">Logout</button>
-    </div>
-
     <div>
         <button onclick="goToUploadPage()">Go to Upload Page</button>
     </div>
@@ -89,7 +64,7 @@
     <script>
         // Get user data from localStorage (set during login)
         const user = JSON.parse(localStorage.getItem('user'));
-
+        
         // If user data is not found, redirect to the login page
         if (!user) {
             alert('You need to log in first.');
@@ -97,7 +72,7 @@
         } else {
             // Display the logged-in user's username
             document.getElementById('usernameDisplay').textContent = user.username;
-
+            
             // Function to navigate to upload.html page and pass the username through localStorage
             function goToUploadPage() {
                 // Store username in localStorage
@@ -109,7 +84,7 @@
             fetchPhotos(user.username);
         }
 
-        let allPhotos = []; // Store the photos globally to filter them later
+        let photosData = []; // Store the photos globally to filter them later
 
         async function fetchPhotos(username) {
             const response = await fetch(`/api/photos?userId=${username}`);
@@ -119,17 +94,17 @@
             }
 
             const data = await response.json();
-            allPhotos = data.photos; // Store the photos in the global variable
+            photosData = data.photos; // Store the photos in the global variable
 
             const photosContainer = document.getElementById('photosContainer');
             photosContainer.innerHTML = ''; // Clear any previous photos
 
-            if (allPhotos.length === 0) {
+            if (photosData.length === 0) {
                 photosContainer.innerHTML = '<p>No photos uploaded yet!</p>';
                 return;
             }
 
-            displayPhotos(allPhotos);
+            displayPhotos(photosData);
         }
 
         function displayPhotos(photos) {
@@ -141,50 +116,24 @@
                 photoItem.classList.add('photo-item');
 
                 const imgElement = document.createElement('img');
-		imgElement.src = photo.photo_url + "?authuser=1"; // URL of the photo uploaded to Google Cloud
+                imgElement.src = photo.photo_url; // URL of the photo uploaded to Google Cloud
                 imgElement.alt = photo.photo_name;
 
                 const photoName = document.createElement('p');
                 photoName.textContent = photo.photo_name;
 
-                // Create the download button
-                const downloadBtn = document.createElement('a');
-                downloadBtn.textContent = 'Download'; // Text for the download button
-                downloadBtn.classList.add('download-btn');
-                downloadBtn.download = photo.photo_name; // Trigger download with the photo's name as the filename
-		downloadBtn.setAttribute('href', photo.photo_name);
-                // No need to target a new tab or window, so we omit the target attribute
-
                 photoItem.appendChild(imgElement);
                 photoItem.appendChild(photoName);
-                photoItem.appendChild(downloadBtn);  // Append the download button
                 photosContainer.appendChild(photoItem);
             });
         }
 
-        function searchPhotos() {
+        function filterPhotos() {
             const searchValue = document.getElementById('search').value.toLowerCase();
-            console.log('Search value:', searchValue);  // Debugging: Check the entered search term
-
-            // Filter the photos based on the search value (matching photo names)
-            const filteredPhotos = allPhotos.filter(photo => {
-                // Ensure photo_name is a string before calling toLowerCase
-                const photoName = photo.photo_name ? photo.photo_name.toLowerCase() : '';
-                return photoName.includes(searchValue);
-            });
-
-            console.log('Filtered photos:', filteredPhotos);  // Debugging: Check the filtered photos
-
-            // Display the filtered photos
-            displayPhotos(filteredPhotos);
-        }
-
-        function logout() {
-            // Remove the user data from localStorage
-            localStorage.removeItem('user');
-            
-            // Redirect to the login page
-            window.location.href = 'index.html'; // Replace with your actual login page URL
+            const filteredPhotos = photosData.filter((photo) =>
+                photo.photo_name.toLowerCase().includes(searchValue)
+            );
+            displayPhotos(filteredPhotos); // Update the displayed photos with the filtered results
         }
     </script>
 </body>

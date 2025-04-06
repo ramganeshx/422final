@@ -1,0 +1,414 @@
+Server running on port 5000
+Server running on port 5000
+Server running on port 5000
+[33mwarn[39m:    --minUptime not set. Defaulting to: 1000ms
+[33mwarn[39m:    --spinSleepTime not set. Your script will exit if it does not stay up for at least 1000ms
+(node:417455) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:417455) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+[31merror[39m:   Cannot start forever
+[31merror[39m:   script /home/alexisfeeney9/photogallery/public/serverv5.js does not exist.
+[33mwarn[39m:    --minUptime not set. Defaulting to: 1000ms
+[33mwarn[39m:    --spinSleepTime not set. Your script will exit if it does not stay up for at least 1000ms
+(node:417467) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:417467) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+Server running on port 5000
+File found, attempting upload...
+File uploaded successfully!
+File found, attempting upload...
+File uploaded successfully!
+[33mwarn[39m:    --minUptime not set. Defaulting to: 1000ms
+[33mwarn[39m:    --spinSleepTime not set. Your script will exit if it does not stay up for at least 1000ms
+(node:417522) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:417522) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+Server running on port 5000
+File found, attempting upload...
+File uploaded successfully!
+[33mwarn[39m:    --minUptime not set. Defaulting to: 1000ms
+[33mwarn[39m:    --spinSleepTime not set. Your script will exit if it does not stay up for at least 1000ms
+(node:418086) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:418086) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+node:events:502
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1908:16)
+    at listenInCluster (node:net:1965:12)
+    at Server.listen (node:net:2067:7)
+    at Function.listen (/home/alexisfeeney9/photogallery/node_modules/express/lib/application.js:635:24)
+    at Object.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:231:5)
+    at Module._compile (node:internal/modules/cjs/loader:1529:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
+    at Module.load (node:internal/modules/cjs/loader:1275:32)
+    at Module._load (node:internal/modules/cjs/loader:1096:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1944:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 5000
+}
+
+Node.js v20.19.0
+{"level":"error","message":"Forever detected script exited with code: 1"}
+File found, attempting upload...
+File uploaded successfully!
+[33mwarn[39m:    --minUptime not set. Defaulting to: 1000ms
+[33mwarn[39m:    --spinSleepTime not set. Your script will exit if it does not stay up for at least 1000ms
+(node:418115) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:418115) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+node:events:502
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1908:16)
+    at listenInCluster (node:net:1965:12)
+    at Server.listen (node:net:2067:7)
+    at Function.listen (/home/alexisfeeney9/photogallery/node_modules/express/lib/application.js:635:24)
+    at Object.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:231:5)
+    at Module._compile (node:internal/modules/cjs/loader:1529:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
+    at Module.load (node:internal/modules/cjs/loader:1275:32)
+    at Module._load (node:internal/modules/cjs/loader:1096:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1944:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 5000
+}
+
+Node.js v20.19.0
+{"level":"error","message":"Forever detected script exited with code: 1"}
+File found, attempting upload...
+File uploaded successfully!
+File found, attempting upload...
+File uploaded successfully!
+File found, attempting upload...
+File uploaded successfully!
+[33mwarn[39m:    --minUptime not set. Defaulting to: 1000ms
+[33mwarn[39m:    --spinSleepTime not set. Your script will exit if it does not stay up for at least 1000ms
+(node:418177) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:418177) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+Server running on port 5000
+[33mwarn[39m:    --minUptime not set. Defaulting to: 1000ms
+[33mwarn[39m:    --spinSleepTime not set. Your script will exit if it does not stay up for at least 1000ms
+(node:418707) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:418707) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+Server running on port 5000
+[33mwarn[39m:    --minUptime not set. Defaulting to: 1000ms
+[33mwarn[39m:    --spinSleepTime not set. Your script will exit if it does not stay up for at least 1000ms
+(node:418733) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:418733) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+Server running on port 5000
+File found, attempting upload...
+Error during upload: ReferenceError: PublicUrl is not defined
+    at Writable.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:154:21)
+    at Writable.emit (node:events:524:28)
+    at finish (node:internal/streams/writable:955:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+File found, attempting upload...
+Error during upload: ReferenceError: PublicUrl is not defined
+    at Writable.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:154:21)
+    at Writable.emit (node:events:524:28)
+    at finish (node:internal/streams/writable:955:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+File found, attempting upload...
+Error during upload: ReferenceError: PublicUrl is not defined
+    at Writable.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:154:21)
+    at Writable.emit (node:events:524:28)
+    at finish (node:internal/streams/writable:955:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+File found, attempting upload...
+Error during upload: ReferenceError: PublicUrl is not defined
+    at Writable.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:154:21)
+    at Writable.emit (node:events:524:28)
+    at finish (node:internal/streams/writable:955:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+File found, attempting upload...
+Error during upload: ReferenceError: PublicUrl is not defined
+    at Writable.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:154:21)
+    at Writable.emit (node:events:524:28)
+    at finish (node:internal/streams/writable:955:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+File found, attempting upload...
+Error during upload: ReferenceError: PublicUrl is not defined
+    at Writable.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:154:21)
+    at Writable.emit (node:events:524:28)
+    at finish (node:internal/streams/writable:955:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+File found, attempting upload...
+Error during upload: ReferenceError: PublicUrl is not defined
+    at Writable.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:154:21)
+    at Writable.emit (node:events:524:28)
+    at finish (node:internal/streams/writable:955:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+File found, attempting upload...
+Error during upload: ReferenceError: PublicUrl is not defined
+    at Writable.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:154:21)
+    at Writable.emit (node:events:524:28)
+    at finish (node:internal/streams/writable:955:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+File found, attempting upload...
+Error during upload: ReferenceError: PublicUrl is not defined
+    at Writable.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:154:21)
+    at Writable.emit (node:events:524:28)
+    at finish (node:internal/streams/writable:955:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+File found, attempting upload...
+File found, attempting upload...
+Error during upload: ReferenceError: PublicUrl is not defined
+    at Writable.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:154:21)
+    at Writable.emit (node:events:524:28)
+    at finish (node:internal/streams/writable:955:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+Error during upload: ReferenceError: PublicUrl is not defined
+    at Writable.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:154:21)
+    at Writable.emit (node:events:524:28)
+    at finish (node:internal/streams/writable:955:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+File found, attempting upload...
+Error during upload: ReferenceError: PublicUrl is not defined
+    at Writable.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:154:21)
+    at Writable.emit (node:events:524:28)
+    at finish (node:internal/streams/writable:955:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+File found, attempting upload...
+Error during upload: ReferenceError: PublicUrl is not defined
+    at Writable.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:154:21)
+    at Writable.emit (node:events:524:28)
+    at finish (node:internal/streams/writable:955:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+File found, attempting upload...
+Error during upload: ReferenceError: PublicUrl is not defined
+    at Writable.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:154:21)
+    at Writable.emit (node:events:524:28)
+    at finish (node:internal/streams/writable:955:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+File found, attempting upload...
+Error during upload: ReferenceError: PublicUrl is not defined
+    at Writable.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:154:21)
+    at Writable.emit (node:events:524:28)
+    at finish (node:internal/streams/writable:955:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+File found, attempting upload...
+Error during upload: ReferenceError: PublicUrl is not defined
+    at Writable.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:154:21)
+    at Writable.emit (node:events:524:28)
+    at finish (node:internal/streams/writable:955:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+Server running on port 5000
+File found, attempting upload...
+Error during upload: ReferenceError: PublicUrl is not defined
+    at Writable.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:154:21)
+    at Writable.emit (node:events:524:28)
+    at finish (node:internal/streams/writable:955:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+File found, attempting upload...
+Error during upload: ReferenceError: PublicUrl is not defined
+    at Writable.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:154:21)
+    at Writable.emit (node:events:524:28)
+    at finish (node:internal/streams/writable:955:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+File found, attempting upload...
+Error during upload: ReferenceError: PublicUrl is not defined
+    at Writable.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:154:21)
+    at Writable.emit (node:events:524:28)
+    at finish (node:internal/streams/writable:955:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+File found, attempting upload...
+Error during upload: ReferenceError: PublicUrl is not defined
+    at Writable.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:154:21)
+    at Writable.emit (node:events:524:28)
+    at finish (node:internal/streams/writable:955:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+File found, attempting upload...
+Error during upload: ReferenceError: PublicUrl is not defined
+    at Writable.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:154:21)
+    at Writable.emit (node:events:524:28)
+    at finish (node:internal/streams/writable:955:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+node:events:502
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1908:16)
+    at listenInCluster (node:net:1965:12)
+    at Server.listen (node:net:2067:7)
+    at Function.listen (/home/alexisfeeney9/photogallery/node_modules/express/lib/application.js:635:24)
+    at Object.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:231:5)
+    at Module._compile (node:internal/modules/cjs/loader:1529:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
+    at Module.load (node:internal/modules/cjs/loader:1275:32)
+    at Module._load (node:internal/modules/cjs/loader:1096:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1944:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 5000
+}
+
+Node.js v20.19.0
+[33mwarn[39m:    --minUptime not set. Defaulting to: 1000ms
+[33mwarn[39m:    --spinSleepTime not set. Your script will exit if it does not stay up for at least 1000ms
+(node:419486) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:419486) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+Server running on port 5000
+[33mwarn[39m:    --minUptime not set. Defaulting to: 1000ms
+[33mwarn[39m:    --spinSleepTime not set. Your script will exit if it does not stay up for at least 1000ms
+(node:420132) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:420132) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+Server running on port 5000
+[33mwarn[39m:    --minUptime not set. Defaulting to: 1000ms
+[33mwarn[39m:    --spinSleepTime not set. Your script will exit if it does not stay up for at least 1000ms
+(node:420184) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:420184) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+node:events:502
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1908:16)
+    at listenInCluster (node:net:1965:12)
+    at Server.listen (node:net:2067:7)
+    at Function.listen (/home/alexisfeeney9/photogallery/node_modules/express/lib/application.js:635:24)
+    at Object.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:230:5)
+    at Module._compile (node:internal/modules/cjs/loader:1529:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
+    at Module.load (node:internal/modules/cjs/loader:1275:32)
+    at Module._load (node:internal/modules/cjs/loader:1096:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1944:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 5000
+}
+
+Node.js v20.19.0
+{"level":"error","message":"Forever detected script exited with code: 1"}
+[33mwarn[39m:    --minUptime not set. Defaulting to: 1000ms
+[33mwarn[39m:    --spinSleepTime not set. Your script will exit if it does not stay up for at least 1000ms
+(node:420217) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:420217) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+node:events:502
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1908:16)
+    at listenInCluster (node:net:1965:12)
+    at Server.listen (node:net:2067:7)
+    at Function.listen (/home/alexisfeeney9/photogallery/node_modules/express/lib/application.js:635:24)
+    at Object.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:230:5)
+    at Module._compile (node:internal/modules/cjs/loader:1529:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
+    at Module.load (node:internal/modules/cjs/loader:1275:32)
+    at Module._load (node:internal/modules/cjs/loader:1096:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1944:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 5000
+}
+
+Node.js v20.19.0
+{"level":"error","message":"Forever detected script exited with code: 1"}
+{"level":"error","message":"Forever detected script was killed by signal: SIGKILL"}
+{"level":"error","message":"Script restart attempt #1"}
+Server running on port 5000
+[33mwarn[39m:    --minUptime not set. Defaulting to: 1000ms
+[33mwarn[39m:    --spinSleepTime not set. Your script will exit if it does not stay up for at least 1000ms
+(node:420261) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:420261) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+node:events:502
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1908:16)
+    at listenInCluster (node:net:1965:12)
+    at Server.listen (node:net:2067:7)
+    at Function.listen (/home/alexisfeeney9/photogallery/node_modules/express/lib/application.js:635:24)
+    at Object.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:230:5)
+    at Module._compile (node:internal/modules/cjs/loader:1529:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
+    at Module.load (node:internal/modules/cjs/loader:1275:32)
+    at Module._load (node:internal/modules/cjs/loader:1096:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1944:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 5000
+}
+
+Node.js v20.19.0
+{"level":"error","message":"Forever detected script exited with code: 1"}
+[33mwarn[39m:    --minUptime not set. Defaulting to: 1000ms
+[33mwarn[39m:    --spinSleepTime not set. Your script will exit if it does not stay up for at least 1000ms
+(node:420295) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:420295) Warning: Accessing non-existent property 'padLevels' of module exports inside circular dependency
+node:events:502
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1908:16)
+    at listenInCluster (node:net:1965:12)
+    at Server.listen (node:net:2067:7)
+    at Function.listen (/home/alexisfeeney9/photogallery/node_modules/express/lib/application.js:635:24)
+    at Object.<anonymous> (/home/alexisfeeney9/photogallery/serverv5.js:230:5)
+    at Module._compile (node:internal/modules/cjs/loader:1529:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
+    at Module.load (node:internal/modules/cjs/loader:1275:32)
+    at Module._load (node:internal/modules/cjs/loader:1096:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1944:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 5000
+}
+
+Node.js v20.19.0
+{"level":"error","message":"Forever detected script exited with code: 1"}
