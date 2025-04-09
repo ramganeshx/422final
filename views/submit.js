@@ -18,7 +18,7 @@ document.getElementById("submitBtn").addEventListener("click", () => {
   // Build the form data - You can add other input values to this i.e descriptions, make sure img is appended last
   let formData = new FormData();
   formData.append("imgfile", newFile);
-  fetch("/upload", {
+  fetch("https://proj4-456020.uc.r.appspot.com/upload", {
     method: "POST",
     body: formData,
   })
@@ -27,7 +27,7 @@ document.getElementById("submitBtn").addEventListener("click", () => {
 });
 // Loads the posts on page load
 function loadPosts() {
-  fetch("/upload")
+  fetch("https://proj4-456020.uc.r.appspot.com/upload")
     .then((res) => res.json())
     .then((x) => {
       for (y = 0; y < x[0].length; y++) {

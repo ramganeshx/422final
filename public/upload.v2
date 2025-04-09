@@ -114,7 +114,7 @@
             formData.append('username', user.username); // Include the username as part of the upload
 
             // Submit the photo to the server (replace with your backend API)
-            fetch('/api/upload', {
+            fetch('https://proj4-456020.uc.r.appspot.com/api/upload', {
                 method: 'POST',
                 body: formData
             })

@@ -87,7 +87,7 @@
         let photosData = []; // Store the photos globally to filter them later
 
         async function fetchPhotos(username) {
-            const response = await fetch(`/api/photos?userId=${username}`);
+            const response = await fetch(`https://proj4-456020.uc.r.appspot.com/api/photos?userId=${username}`);
             if (!response.ok) {
                 alert('Error fetching photos');
                 return;
