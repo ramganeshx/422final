@@ -13,30 +13,19 @@ app.use(cors());
 app.use(express.json()); // Add this to parse JSON bodies
 
 
-// Hardcoded database credentials
-const DB_USER = 'root';  // Replace with your database username
-const DB_PASS = '422';   // Replace with your database password
-const DB_NAME = 'project3';  // Replace with your database name
-const DB_HOST = '127.0.0.1';  // Cloud SQL Proxy default address or the MySQL server address
-const DB_PORT = 3306;  // Default MySQL port
-
 // Google Cloud Storage configuration
 const storage = new Storage({
-  keyFilename: './key.json', // Replace with your service account key file path
+  keyFilename: './proj4-456020-783da00b791b.json', // Replace with your service account key file path
 });
-const bucketName = 'proj3-bucket'; // Replace with your Google Cloud Storage bucket name
+const bucketName = '422proj4-bucket'; // Replace with your Google Cloud Storage bucket name
 const bucket = storage.bucket(bucketName);
 
 // Create a connection pool to the database
 const pool = mysql.createPool({
-  host: DB_HOST,
-  user: DB_USER,
-  password: DB_PASS,
-  database: DB_NAME,
-  port: DB_PORT,
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
+  user: 'root',
+  password: '422',
+  database: 'project4',
+  socketPath: `/cloudsql/proj4-456020:us-central1:quickstart-instance`,
 });
 
 // Setup Multer for memory storage (no filesystem storage)
@@ -108,7 +97,7 @@ app.post('/api/signup', (req, res) => {
         connection.release();
         return res.status(400).json({ error: 'Username already taken' });
       }
-	
+
       id = Math.floor(Math.random() * 1200 + 3);
 
       // Insert the new user into the database without encryption
@@ -226,6 +215,6 @@ app.get("/", (req, res) => {
 
 
 // Start Server
-const PORT = 5000;
+const PORT = 8080;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 

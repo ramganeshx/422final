@@ -1,0 +1,17 @@
+runtime: nodejs18
+
+entrypoint: node serverv5.js  # Make sure this matches the correct file name
+
+
+env_variables:
+  DB_USER: "root"
+  DB_PASSWORD: "422"
+  DB_NAME: "project4"
+  INSTANCE_CONNECTION_NAME: "proj4-456020:us-central1:quickstart-instance"
+  DB_SOCKET_PATH: "/cloudsql"
+
+handlers:
+  - url: /api/.*
+    script: auto
+    secure: always
+

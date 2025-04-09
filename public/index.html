@@ -47,19 +47,19 @@
 </head>
 <body>
 
-    <div class="login-container">
-        <h2>Login</h2>
-        <input type="text" id="username" placeholder="Username">
-        <input type="password" id="password" placeholder="Password">
-        <button onclick="login()">Login</button>
-	<button onclick="tosignUp()">Sign Up </button>
-        <p class="error-message" id="error-message"></p>
-    </div>
+<div class="login-container">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <button onclick="tosignUp()">Sign Up </button>
+    <p class="error-message" id="error-message"></p>
+</div>
 
-    <script>
-	function tosignUp() {
+<script>
+    function tosignUp() {
             window.location.href = 'signup.html'; // Adjust the URL as needed for your login page
-	}
+    }
         async function login() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
@@ -71,7 +71,7 @@
             }
 
             try {
-                const response = await fetch('http://34.31.214.96:5000/api/login', {
+                const response = await fetch('https://proj4-456020.uc.r.appspot.com/api/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -91,7 +91,7 @@
                 errorMessage.textContent = 'An error occurred. Please try again.';
             }
         }
-    </script>
+</script>
 
 </body>
 </html>

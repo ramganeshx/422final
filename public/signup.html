@@ -55,60 +55,60 @@
 </head>
 <body>
 
-    <div class="signup-container">
-        <h2>Sign Up</h2>
-        <input type="text" id="username" placeholder="Username">
-        <input type="password" id="password" placeholder="Password">
-        <button onclick="signup()">Sign Up</button>
-        <p class="error-message" id="error-message"></p>
-        <p class="success-message" id="success-message"></p>
-        <!-- Back to login button -->
-        <button class="back-to-login-button" onclick="goBackToLogin()">Back to Login</button>
-    </div>
+<div class="signup-container">
+    <h2>Sign Up</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="signup()">Sign Up</button>
+    <p class="error-message" id="error-message"></p>
+    <p class="success-message" id="success-message"></p>
+    <!-- Back to login button -->
+    <button class="back-to-login-button" onclick="goBackToLogin()">Back to Login</button>
+</div>
 
-    <script>
-        async function signup() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const errorMessage = document.getElementById('error-message');
-            const successMessage = document.getElementById('success-message');
+<script>
+    async function signup() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const errorMessage = document.getElementById('error-message');
+        const successMessage = document.getElementById('success-message');
 
-            // Clear previous messages
-            errorMessage.textContent = '';
-            successMessage.textContent = '';
+        // Clear previous messages
+        errorMessage.textContent = '';
+        successMessage.textContent = '';
 
-            // Validate form inputs
-            if (!username || !password) {
-                errorMessage.textContent = 'Please enter both username and password';
-                return;
-            }
-
-            try {
-                const response = await fetch('http://34.31.214.96:5000/api/signup', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ username, password }),
-                });
-
-                const result = await response.json();
-
-                if (response.ok) {
-                    successMessage.textContent = result.message;
-                } else {
-                    errorMessage.textContent = result.error;
-                }
-            } catch (error) {
-                errorMessage.textContent = 'An error occurred. Please try again.';
-            }
+        // Validate form inputs
+        if (!username || !password) {
+            errorMessage.textContent = 'Please enter both username and password';
+            return;
         }
 
-        // Function to redirect to login page
-        function goBackToLogin() {
-            window.location.href = 'index.html'; // Adjust the URL as needed for your login page
+        try {
+            const response = await fetch('https://proj4-456020.uc.r.appspot.com/api/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                successMessage.textContent = result.message;
+            } else {
+                errorMessage.textContent = result.error;
+            }
+        } catch (error) {
+            errorMessage.textContent = 'An error occurred. Please try again.';
         }
-    </script>
+    }
+
+    // Function to redirect to login page
+    function goBackToLogin() {
+        window.location.href = 'index.html'; // Adjust the URL as needed for your login page
+    }
+</script>
 
 </body>
 </html>

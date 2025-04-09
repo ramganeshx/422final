@@ -86,74 +86,74 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1>Photo Gallery - Download</h1>
-        
-        <div>
-            <label for="userIdInput">Enter Your User ID:</label>
-            <input type="text" id="userIdInput" placeholder="Enter your user ID">
-            <button onclick="fetchPhotos()">Fetch Photos</button>
-        </div>
+<div class="container">
+    <h1>Photo Gallery - Download</h1>
 
-        <p id="errorMessage" class="error-message"></p>
-
-        <div id="photosContainer">
-        </div>
+    <div>
+        <label for="userIdInput">Enter Your User ID:</label>
+        <input type="text" id="userIdInput" placeholder="Enter your user ID">
+        <button onclick="fetchPhotos()">Fetch Photos</button>
     </div>
 
-    <script>
-        async function fetchPhotos() {
-            const userId = document.getElementById('userIdInput').value;
-            const errorMessage = document.getElementById('errorMessage');
-            const photosContainer = document.getElementById('photosContainer');
+    <p id="errorMessage" class="error-message"></p>
 
-            errorMessage.textContent = '';
-            photosContainer.innerHTML = '';
+    <div id="photosContainer">
+    </div>
+</div>
 
-            if (!userId) {
-                errorMessage.textContent = 'Please enter a User ID';
+<script>
+    async function fetchPhotos() {
+        const userId = document.getElementById('userIdInput').value;
+        const errorMessage = document.getElementById('errorMessage');
+        const photosContainer = document.getElementById('photosContainer');
+
+        errorMessage.textContent = '';
+        photosContainer.innerHTML = '';
+
+        if (!userId) {
+            errorMessage.textContent = 'Please enter a User ID';
+            return;
+        }
+
+        try {
+            const response = await fetch(`https://proj4-456020.uc.r.appspot.com/api/photos?userId=${userId}`);
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch photos');
+            }
+
+            const data = await response.json();
+
+            if (data.photos.length === 0) {
+                errorMessage.textContent = 'No photos found for this user';
                 return;
             }
 
-            try {
-                const response = await fetch(`http://34.31.214.96:3002/api/photos?userId=${userId}`);
-                
-                if (!response.ok) {
-                    throw new Error('Failed to fetch photos');
-                }
+            data.photos.forEach((photo, index) => {
+                const photoItem = document.createElement('div');
+                photoItem.className = 'photo-item';
 
-                const data = await response.json();
+                const img = document.createElement('img');
+                img.src = photo.photo_url;
+                img.alt = `Photo ${index + 1}`;
 
-                if (data.photos.length === 0) {
-                    errorMessage.textContent = 'No photos found for this user';
-                    return;
-                }
+                const downloadBtn = document.createElement('a');
+                downloadBtn.href = photo.photo_url;
+                downloadBtn.textContent = 'Download';
+                downloadBtn.className = 'download-btn';
+                downloadBtn.download = `photo_${index + 1}.jpg`;
+                downloadBtn.target = '_blank';
 
-                data.photos.forEach((photo, index) => {
-                    const photoItem = document.createElement('div');
-                    photoItem.className = 'photo-item';
-
-                    const img = document.createElement('img');
-                    img.src = photo.photo_url;
-                    img.alt = `Photo ${index + 1}`;
-
-                    const downloadBtn = document.createElement('a');
-                    downloadBtn.href = photo.photo_url;
-                    downloadBtn.textContent = 'Download';
-                    downloadBtn.className = 'download-btn';
-                    downloadBtn.download = `photo_${index + 1}.jpg`;
-                    downloadBtn.target = '_blank';
-
-                    photoItem.appendChild(img);
-                    photoItem.appendChild(downloadBtn);
-                    photosContainer.appendChild(photoItem);
-                });
-            } catch (error) {
-                errorMessage.textContent = error.message;
-                console.error('Error:', error);
-            }
+                photoItem.appendChild(img);
+                photoItem.appendChild(downloadBtn);
+                photosContainer.appendChild(photoItem);
+            });
+        } catch (error) {
+            errorMessage.textContent = error.message;
+            console.error('Error:', error);
         }
-    </script>
+    }
+</script>
 </body>
 
 </html>
