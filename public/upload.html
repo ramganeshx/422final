@@ -119,7 +119,7 @@
             formData.append("userId", user.username); // User ID (username used as user ID)
             
             // Submit the form to the server
-            fetch("/api/upload", {
+            fetch("https://proj4-456020.uc.r.appspot.com/api/upload", {
                 method: "POST",
                 body: formData,
             })
@@ -136,7 +136,7 @@
 
         // Function to load the user's uploaded photos
         function loadPosts() {
-            fetch(`/api/photos?userId=${user.username}`)
+            fetch(`https://proj4-456020.uc.r.appspot.com/api/photos?userId=${user.username}`)
                 .then((res) => res.json())
                 .then((data) => {
                     const imagesContainer = document.getElementById("images");
