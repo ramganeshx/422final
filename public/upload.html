@@ -145,7 +145,7 @@
                     if (data.photos && data.photos.length > 0) {
                         data.photos.forEach((photo) => {
                             const newImg = document.createElement("img");
-                            newImg.setAttribute("src", photo.photo_url+"?authuser=1");
+                            newImg.setAttribute("src", photo.photo_url);
                             newImg.setAttribute("width", 100);
                             newImg.setAttribute("height", 100);
                             imagesContainer.appendChild(newImg);
