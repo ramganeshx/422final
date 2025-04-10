@@ -141,7 +141,7 @@
                 photoItem.classList.add('photo-item');
 
                 const imgElement = document.createElement('img');
-		imgElement.src = photo.photo_url + "?authuser=1"; // URL of the photo uploaded to Google Cloud
+		imgElement.src = photo.photo_url; // URL of the photo uploaded to Google Cloud
                 imgElement.alt = photo.photo_name;
 
                 const photoName = document.createElement('p');
