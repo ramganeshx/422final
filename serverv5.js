@@ -139,7 +139,7 @@ app.post('/api/upload', upload.single('imgfile'), async (req, res) => {
     blobStream.on('finish', async () => {
       try {
 
-        const publicUrl = `https://storage.cloud.google.com/${bucket.name}/${blob.name}`;
+        const publicUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
         // Save the photo metadata in the database
         pool.getConnection((err, connection) => {
           if (err) {
