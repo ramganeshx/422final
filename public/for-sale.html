@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Sale Listings</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+
+    header {
+      background: #333;
+      color: white;
+      padding: 1em;
+      text-align: center;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav a {
+      margin: 0 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      padding: 2em;
+      text-align: center;
+    }
+
+    h1, h2 {
+      color: #333;
+    }
+
+
+    #listing-container {
+      margin-top: 20px;
+    }
+
+    .listing {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 15px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .listing h3 {
+      margin: 0;
+      color: #2c3e50;
+    }
+
+    .listing p {
+      margin: 5px 0;
+      color: #555;
+    }
+
+    footer {
+      background: #eee;
+      padding: 1em;
+      text-align: center;
+      color: #777;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="./for-sale.html">For Sale</a>
+      <a href="./housing.html">Housing</a>
+      <a href="./services.html">Services</a>
+      <a href="./jobs.html">Jobs</a>
+      <a href="./community.html">Community</a>
+    </nav>
+  </header>
+
+  <!-- Main content displaying the For Sale listings -->
+  <main>
+    <h2>For Sale Listings</h2>
+
+    <!-- Display existing listings -->
+    <div id="listing-container">
+      <!-- Listings will be populated here -->
+    </div>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    // Fetch listings when the page loads
+    $(document).ready(function() {
+      $.get('/api/for-sale', function(data) {
+        const listings = data.listings;
+        const container = $('#listing-container');
+        if (listings.length === 0) {
+          container.append('<p>No listings available at the moment.</p>');
+        } else {
+          listings.forEach(listing => {
+            container.append(`
+              <div class="listing">
+                <h3>${listing.title}</h3>
+                <p><strong>Category:</strong> ${listing.category}</p>
+                <p><strong>Description:</strong> ${listing.description}</p>
+                <p><strong>Price:</strong> $${listing.price}</p>
+                <p><strong>City:</strong> ${listing.city}</p>
+                <p><strong>Contact:</strong> ${listing.contact_phone}</p>
+              </div>
+            `);
+          });
+        }
+      }).fail(function(err) {
+        $('#listing-container').html('<p>Failed to load listings.</p>');
+      });
+    });
+  </script>
+</body>
+</html>
