@@ -69,6 +69,7 @@
             window.location.href = 'signup.html'; // Adjust the URL as needed for your login page
     }
     function tostore() {
+            localStorage.removeItem('user');
             window.location.href = 'store.html'; // Adjust the URL as needed for your login page
     }
         async function login() {
@@ -94,7 +95,7 @@
 
                 if (response.ok) {
                     localStorage.setItem('user', JSON.stringify(result.user));
-                    window.location.href = 'photos.html'; // Redirect to photos page
+                    window.location.href = 'store.html'; // Redirect to store page
                 } else {
                     errorMessage.textContent = result.error;
                 }
