@@ -112,17 +112,16 @@
   </header>
 
   <main>
-    <h2>For Sale Listings</h2>
+    <h2>Services Listings</h2>
 
-    <!-- Tabs for categories -->
-    <div id="tabs">
-      <button class="tab-button active" data-category="All">All</button>
-      <button class="tab-button" data-category="Cars + Trucks">Cars + Trucks</button>
-      <button class="tab-button" data-category="Motorcycles">Motorcycles</button>
-      <button class="tab-button" data-category="Boats">Boats</button>
-      <button class="tab-button" data-category="Book">Books</button>
-      <button class="tab-button" data-category="Furniture">Furniture</button>
-    </div>
+  <!-- Tabs for categories --> 
+   <div id="tabs"> <button class="tab-button active" data-category="All">All</button> 
+    <button class="tab-button" data-category="Cleaning">Cleaning</button> 
+    <button class="tab-button" data-category="Lawn & Garden">Lawn & Garden</button> 
+    <button class="tab-button" data-category="Home Repair">Home Repair</button> 
+    <button class="tab-button" data-category="Tutoring ">Tutoring</button> 
+    <button class="tab-button" data-category="Computer/Tech help">Computer/Tech help</button> 
+  </div>
 
     <!-- Listings container -->
     <div id="listing-container"></div>
@@ -147,28 +146,39 @@
               listing.category && listing.category.toLowerCase() === category.toLowerCase()
             );
   
-        if (filtered.length === 0) {
-          container.append('<p>No listings available for this category.</p>');
-        } else {
-          filtered.forEach(listing => {
-            let displayTitle = listing.title || listing.make_model || listing.type || listing.material || 'Listing';
-            container.append(`
-              <div class="listing">
-                <h3>${displayTitle}</h3>
-                <p><strong>Category:</strong> ${listing.category}</p>
-                ${listing.image_url ? `<img src="${listing.image_url}" alt="Listing image" style="max-width: 100%; height: auto; margin-top: 10px;">` : ''}
-                <p><strong>Description:</strong> ${listing.description || 'No description'}</p>
-                ${listing.price ? `<p><strong>Price:</strong> $${listing.price}</p>` : ''}
-                ${listing.city ? `<p><strong>City:</strong> ${listing.city}</p>` : ''}
-                ${listing.phone_number ? `<p><strong>Contact:</strong> ${listing.phone_number}</p>` : ''}
-              </div>
-            `);
-          });
-        }
+            if (filtered.length === 0) {
+  container.append('<p>No listings available for this category.</p>');
+} else {
+  filtered.forEach(listing => {
+    let displayTitle = listing.category || 'Listing';
+    container.append(`
+      <div class="listing">
+        <h3>${listing.service_type || listing.title || 'Service Listing'}</h3>
+        <p><strong>Category:</strong> ${listing.category || 'N/A'}</p>
+        ${listing.image_url ? `<img src="${listing.image_url}" alt="Service image" style="max-width: 100%; height: auto; margin-top: 10px;">` : ''}
+        <p><strong>Description:</strong> ${listing.service_details || listing.description || 'No description provided'}</p>
+        ${listing.price_per_hour ? `<p><strong>Price per Hour:</strong> $${listing.price_per_hour}</p>` : ''}
+        ${listing.duration ? `<p><strong>Duration:</strong> ${listing.duration}</p>` : ''}
+        ${listing.frequency ? `<p><strong>Frequency:</strong> ${listing.frequency}</p>` : ''}
+        ${listing.areas_served ? `<p><strong>Areas Served:</strong> ${listing.areas_served}</p>` : ''}
+        ${listing.experience ? `<p><strong>Experience:</strong> ${listing.experience}</p>` : ''}
+        ${listing.availability ? `<p><strong>Availability:</strong> ${listing.availability}</p>` : ''}
+        ${listing.equipment_used ? `<p><strong>Equipment Used:</strong> ${listing.equipment_used}</p>` : ''}
+        ${listing.tools_materials_provided ? `<p><strong>Tools & Materials Provided:</strong> ${listing.tools_materials_provided}</p>` : ''}
+        ${listing.licensed_insured ? `<p><strong>Licensed & Insured:</strong> ${listing.licensed_insured ? 'Yes' : 'No'}</p>` : ''}
+        ${listing.location ? `<p><strong>Location:</strong> ${listing.location}</p>` : ''}
+        ${listing.level ? `<p><strong>Level:</strong> ${listing.level}</p>` : ''}
+        ${listing.session_length ? `<p><strong>Session Length:</strong> ${listing.session_length}</p>` : ''}
+        ${listing.contact_phone ? `<p><strong>Phone Number:</strong> ${listing.contact_phone}</p>` : ''}
+    </div>
+    `);
+  });
+}
+
       }
   
       // Load listings on page load
-      $.get('/api/for-sale', function (data) {
+      $.get('/api/services', function (data) {
         allListings = data.listings || [];
         renderListings("All");
       }).fail(function () {

@@ -24,7 +24,7 @@
             text-align: center;
         }
         .signup-container input {
-            width: 100%;
+            width: 93%;
             padding: 10px;
             margin: 10px 0;
             border: 1px solid #ccc;
@@ -33,7 +33,7 @@
         .signup-container button {
             width: 100%;
             padding: 10px;
-            background-color: #4CAF50;
+            background-color: #555;
             color: white;
             border: none;
             border-radius: 3px;
@@ -96,6 +96,7 @@
 
             if (response.ok) {
                 successMessage.textContent = result.message;
+                window.location.href = 'index.html';
             } else {
                 errorMessage.textContent = result.error;
             }

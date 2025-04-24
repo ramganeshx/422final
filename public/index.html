@@ -23,21 +23,28 @@
         .login-container h2 {
             text-align: center;
         }
+
         .login-container input {
-            width: 100%;
+            width: 88%;
             padding: 10px;
-            margin: 10px 0;
+            margin: 10px;
+            align-self: center;
             border: 1px solid #ccc;
             border-radius: 3px;
         }
+        
         .login-container button {
-            width: 100%;
+            width: 95%;
             padding: 10px;
-            background-color: #4CAF50;
+            margin: 10px;
+            background-color: #555;
             color: white;
             border: none;
             border-radius: 3px;
             cursor: pointer;
+        }
+        button{
+          margin: 10px;
         }
         .error-message {
             color: red;
@@ -53,10 +60,14 @@
     <input type="password" id="password" placeholder="Password">
     <button onclick="login()">Login</button>
     <button onclick="tostore()">Visitor</button>
+    <button onclick="tosignup()">Sign Up</button>
     <p class="error-message" id="error-message"></p>
 </div>
 
 <script>
+    function tosignup() {
+            window.location.href = 'signup.html'; // Adjust the URL as needed for your login page
+    }
     function tostore() {
             window.location.href = 'store.html'; // Adjust the URL as needed for your login page
     }

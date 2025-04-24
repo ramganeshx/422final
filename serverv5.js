@@ -208,6 +208,116 @@ app.get('/api/photos', (req, res) => {
   });
 });
 
+// API Route to fetch "For Sale" listings
+app.get('/api/for-sale', (req, res) => {
+  pool.getConnection((err, connection) => {
+    if (err) {
+      console.error('Error getting connection from pool:', err.stack);
+      return res.status(500).json({ error: 'Database connection failed' });
+    }
+
+    const query = 'SELECT * FROM for_sale';
+    connection.execute(query, [], (err, results) => {
+      connection.release();  // Release the connection back to the pool
+
+      if (err) {
+        console.error('Error fetching listings:', err);
+        return res.status(500).json({ error: 'Failed to fetch listings' });
+      }
+
+      return res.status(200).json({ listings: results });
+    });
+  });
+});
+
+// API Route to fetch "Housing" listings
+app.get('/api/housing', (req, res) => {
+  pool.getConnection((err, connection) => {
+    if (err) {
+      console.error('Error getting connection from pool:', err.stack);
+      return res.status(500).json({ error: 'Database connection failed' });
+    }
+
+    const query = 'SELECT * FROM housing';
+    connection.execute(query, [], (err, results) => {
+      connection.release();  // Release the connection back to the pool
+
+      if (err) {
+        console.error('Error fetching listings:', err);
+        return res.status(500).json({ error: 'Failed to fetch listings' });
+      }
+
+      return res.status(200).json({ listings: results });
+    });
+  });
+});
+
+// API Route to fetch "services" listings
+app.get('/api/services', (req, res) => {
+  pool.getConnection((err, connection) => {
+    if (err) {
+      console.error('Error getting connection from pool:', err.stack);
+      return res.status(500).json({ error: 'Database connection failed' });
+    }
+
+    const query = 'SELECT * FROM services';
+    connection.execute(query, [], (err, results) => {
+      connection.release();  // Release the connection back to the pool
+
+      if (err) {
+        console.error('Error fetching listings:', err);
+        return res.status(500).json({ error: 'Failed to fetch listings' });
+      }
+
+      return res.status(200).json({ listings: results });
+    });
+  });
+});
+
+// API Route to fetch "jobs" listings
+app.get('/api/jobs', (req, res) => {
+  pool.getConnection((err, connection) => {
+    if (err) {
+      console.error('Error getting connection from pool:', err.stack);
+      return res.status(500).json({ error: 'Database connection failed' });
+    }
+
+    const query = 'SELECT * FROM jobs';
+    connection.execute(query, [], (err, results) => {
+      connection.release();  // Release the connection back to the pool
+
+      if (err) {
+        console.error('Error fetching listings:', err);
+        return res.status(500).json({ error: 'Failed to fetch listings' });
+      }
+
+      return res.status(200).json({ listings: results });
+    });
+  });
+});
+
+// API Route to fetch "community" listings
+app.get('/api/community', (req, res) => {
+  pool.getConnection((err, connection) => {
+    if (err) {
+      console.error('Error getting connection from pool:', err.stack);
+      return res.status(500).json({ error: 'Database connection failed' });
+    }
+
+    const query = 'SELECT * FROM community';
+    connection.execute(query, [], (err, results) => {
+      connection.release();  // Release the connection back to the pool
+
+      if (err) {
+        console.error('Error fetching listings:', err);
+        return res.status(500).json({ error: 'Failed to fetch listings' });
+      }
+
+      return res.status(200).json({ listings: results });
+    });
+  });
+});
+
 // Get the main index html file
 app.get("/", (req, res) => {
  res.sendFile(path.join(__dirname, 'public', 'index.html'));

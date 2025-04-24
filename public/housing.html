@@ -112,16 +112,16 @@
   </header>
 
   <main>
-    <h2>For Sale Listings</h2>
+    <h2>Housing Listings</h2>
 
     <!-- Tabs for categories -->
     <div id="tabs">
       <button class="tab-button active" data-category="All">All</button>
-      <button class="tab-button" data-category="Cars + Trucks">Cars + Trucks</button>
-      <button class="tab-button" data-category="Motorcycles">Motorcycles</button>
-      <button class="tab-button" data-category="Boats">Boats</button>
-      <button class="tab-button" data-category="Book">Books</button>
-      <button class="tab-button" data-category="Furniture">Furniture</button>
+      <button class="tab-button" data-category="House For Sale">House For Sale</button>
+      <button class="tab-button" data-category="House For Rent">House For Rent</button>
+      <button class="tab-button" data-category="Apartment">Apartment</button>
+      <button class="tab-button" data-category="Sublets">Sublets</button>
+      <button class="tab-button" data-category="Mobile Homes">Mobile Homes</button>
     </div>
 
     <!-- Listings container -->
@@ -147,28 +147,39 @@
               listing.category && listing.category.toLowerCase() === category.toLowerCase()
             );
   
-        if (filtered.length === 0) {
-          container.append('<p>No listings available for this category.</p>');
-        } else {
-          filtered.forEach(listing => {
-            let displayTitle = listing.title || listing.make_model || listing.type || listing.material || 'Listing';
-            container.append(`
-              <div class="listing">
-                <h3>${displayTitle}</h3>
-                <p><strong>Category:</strong> ${listing.category}</p>
-                ${listing.image_url ? `<img src="${listing.image_url}" alt="Listing image" style="max-width: 100%; height: auto; margin-top: 10px;">` : ''}
-                <p><strong>Description:</strong> ${listing.description || 'No description'}</p>
-                ${listing.price ? `<p><strong>Price:</strong> $${listing.price}</p>` : ''}
-                ${listing.city ? `<p><strong>City:</strong> ${listing.city}</p>` : ''}
-                ${listing.phone_number ? `<p><strong>Contact:</strong> ${listing.phone_number}</p>` : ''}
-              </div>
-            `);
-          });
-        }
+            if (filtered.length === 0) {
+  container.append('<p>No listings available for this category.</p>');
+} else {
+  filtered.forEach(listing => {
+    let displayTitle = listing.category || 'Listing';
+    container.append(`
+      <div class="listing">
+        <h3>${displayTitle}</h3>
+        <p><strong>Category:</strong> ${listing.category}</p>
+        ${listing.image_url ? `<img src="${listing.image_url}" alt="Listing image" style="max-width: 100%; height: auto; margin-top: 10px;">` : ''}
+        <p><strong>Description:</strong> ${listing.description || 'No description'}</p>
+        ${listing.price ? `<p><strong>Price:</strong> $${listing.price}</p>` : ''}
+        ${listing.location ? `<p><strong>Location:</strong> ${listing.location}</p>` : ''}
+        ${listing.bedrooms ? `<p><strong>Bedrooms:</strong> ${listing.bedrooms}</p>` : ''}
+        ${listing.bathrooms ? `<p><strong>Bathrooms:</strong> ${listing.bathrooms}</p>` : ''}
+        ${listing.square_footage ? `<p><strong>Square Footage:</strong> ${listing.square_footage} sq ft</p>` : ''}
+        ${listing.lot_size ? `<p><strong>Lot Size:</strong> ${listing.lot_size}</p>` : ''}
+        ${listing.year_built ? `<p><strong>Year Built:</strong> ${listing.year_built}</p>` : ''}
+        ${listing.lease_length ? `<p><strong>Lease Length:</strong> ${listing.lease_length}</p>` : ''}
+        ${listing.availability ? `<p><strong>Availability:</strong> ${listing.availability}</p>` : ''}
+        ${listing.furnished !== undefined ? `<p><strong>Furnished:</strong> ${listing.furnished ? 'Yes' : 'No'}</p>` : ''}
+        ${listing.pet_friendly !== undefined ? `<p><strong>Pet Friendly:</strong> ${listing.pet_friendly ? 'Yes' : 'No'}</p>` : ''}
+        ${listing.condition ? `<p><strong>Condition:</strong> ${listing.condition}</p>` : ''}
+        ${listing.lot_rent ? `<p><strong>Lot Rent:</strong> $${listing.lot_rent}</p>` : ''}
+      </div>
+    `);
+  });
+}
+
       }
   
       // Load listings on page load
-      $.get('/api/for-sale', function (data) {
+      $.get('/api/housing', function (data) {
         allListings = data.listings || [];
         renderListings("All");
       }).fail(function () {

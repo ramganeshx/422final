@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Sale Listings</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+
+    header {
+      background: #333;
+      color: white;
+      padding: 1em;
+      text-align: center;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav a {
+      margin: 0 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      padding: 2em;
+      text-align: center;
+    }
+
+    h1, h2 {
+      color: #333;
+    }
+
+    #tabs {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .tab-button {
+      background-color: #ddd;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+
+    .tab-button.active {
+      background-color: #2c3e50;
+      color: white;
+    }
+
+    #listing-container {
+      margin-top: 20px;
+    }
+
+    .listing {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 15px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: left;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .listing h3 {
+      margin: 0;
+      color: #2c3e50;
+    }
+
+    .listing p {
+      margin: 5px 0;
+      color: #555;
+    }
+
+    footer {
+      background: #eee;
+      padding: 1em;
+      text-align: center;
+      color: #777;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="./for-sale.html">For Sale</a>
+      <a href="./housing.html">Housing</a>
+      <a href="./services.html">Services</a>
+      <a href="./jobs.html">Jobs</a>
+      <a href="./community.html">Community</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Community Listings</h2>
+
+    <!-- Tabs for categories -->
+    <div id="tabs">
+      <button class="tab-button active" data-category="All">All</button>
+      <button class="tab-button" data-category="Events">Events</button>
+      <button class="tab-button" data-category="Volunteer">Volunteer</button>
+      <button class="tab-button" data-category="Classes/Workshops">Classes/Workshops</button>
+      <button class="tab-button" data-category="Childcare">Childcare</button>
+      <button class="tab-button" data-category="Groups">Groups</button>
+    </div>
+
+    <!-- Listings container -->
+    <div id="listing-container"></div>
+  </main>
+
+  <footer>
+    &copy; 2025 Local Listings. All rights reserved.
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      let allListings = [];
+  
+      function renderListings(category) {
+        const container = $('#listing-container');
+        container.empty();
+  
+        const filtered = category.toLowerCase() === "all"
+          ? allListings
+          : allListings.filter(listing =>
+              listing.category && listing.category.toLowerCase() === category.toLowerCase()
+            );
+  
+            if (filtered.length === 0) {
+  container.append('<p>No listings available for this category.</p>');
+} else {
+  filtered.forEach(listing => {
+  let displayTitle = listing.category || 'Listing';
+  container.append(`
+    <div class="listing">
+      <h3>${displayTitle}</h3>
+      <p><strong>Category:</strong> ${listing.category}</p>
+      ${listing.image_url ? `<img src="${listing.image_url}" alt="Listing image" style="max-width: 100%; height: auto; margin-top: 10px;">` : ''}
+      <p><strong>Description:</strong> ${listing.description || 'No description'}</p>
+      ${listing.event_name ? `<p><strong>Event Name:</strong> ${listing.event_name}</p>` : ''}
+      ${listing.event_date ? `<p><strong>Date:</strong> ${listing.event_date}</p>` : ''}
+      ${listing.event_time ? `<p><strong>Time:</strong> ${listing.event_time}</p>` : ''}
+      ${listing.event_location ? `<p><strong>Location:</strong> ${listing.event_location}</p>` : ''}
+      ${listing.event_type ? `<p><strong>Type of Event:</strong> ${listing.event_type}</p>` : ''}
+      ${listing.admission_fee ? `<p><strong>Admission Fee:</strong> $${listing.admission_fee}</p>` : ''}
+      ${listing.host_organizer ? `<p><strong>Host/Organizer:</strong> ${listing.host_organizer}</p>` : ''}
+      ${listing.contact_info ? `<p><strong>Contact Info:</strong> ${listing.contact_info}</p>` : ''}
+      ${listing.registration_info ? `<p><strong>Registration/RSVP Info:</strong> ${listing.registration_info}</p>` : ''}
+      ${listing.volunteer_title ? `<p><strong>Volunteer Opportunity Title:</strong> ${listing.volunteer_title}</p>` : ''}
+      ${listing.volunteer_organization ? `<p><strong>Organization Name:</strong> ${listing.volunteer_organization}</p>` : ''}
+      ${listing.volunteer_location ? `<p><strong>Location:</strong> ${listing.volunteer_location}</p>` : ''}
+      ${listing.volunteer_dates ? `<p><strong>Dates:</strong> ${listing.volunteer_dates}</p>` : ''}
+      ${listing.volunteer_times ? `<p><strong>Times:</strong> ${listing.volunteer_times}</p>` : ''}
+      ${listing.volunteer_type_of_work ? `<p><strong>Type of Work:</strong> ${listing.volunteer_type_of_work}</p>` : ''}
+      ${listing.volunteer_required_skills ? `<p><strong>Required Skills:</strong> ${listing.volunteer_required_skills}</p>` : ''}
+      ${listing.volunteer_commitment_level ? `<p><strong>Commitment Level:</strong> ${listing.volunteer_commitment_level}</p>` : ''}
+      ${listing.volunteer_age_requirement ? `<p><strong>Age Requirement:</strong> ${listing.volunteer_age_requirement}</p>` : ''}
+      ${listing.class_title ? `<p><strong>Class/Workshop Title:</strong> ${listing.class_title}</p>` : ''}
+      ${listing.class_instructor ? `<p><strong>Instructor/Host:</strong> ${listing.class_instructor}</p>` : ''}
+      ${listing.class_location ? `<p><strong>Location:</strong> ${listing.class_location}</p>` : ''}
+      ${listing.class_dates ? `<p><strong>Dates:</strong> ${listing.class_dates}</p>` : ''}
+      ${listing.class_times ? `<p><strong>Times:</strong> ${listing.class_times}</p>` : ''}
+      ${listing.class_skill_level ? `<p><strong>Skill Level:</strong> ${listing.class_skill_level}</p>` : ''}
+      ${listing.class_materials_needed ? `<p><strong>Materials Needed:</strong> ${listing.class_materials_needed}</p>` : ''}
+      ${listing.class_age_requirement ? `<p><strong>Age Requirement:</strong> ${listing.class_age_requirement}</p>` : ''}
+      ${listing.class_phone_number ? `<p><strong>Phone Number:</strong> ${listing.class_phone_number}</p>` : ''}
+      ${listing.childcare_service_type ? `<p><strong>Childcare Service Type:</strong> ${listing.childcare_service_type}</p>` : ''}
+      ${listing.childcare_caregiver ? `<p><strong>Caregiver Name or Business:</strong> ${listing.childcare_caregiver}</p>` : ''}
+      ${listing.childcare_availability ? `<p><strong>Availability:</strong> ${listing.childcare_availability}</p>` : ''}
+      ${listing.childcare_age_range ? `<p><strong>Age Range Accepted:</strong> ${listing.childcare_age_range}</p>` : ''}
+      ${listing.childcare_experience ? `<p><strong>Experience/Qualifications:</strong> ${listing.childcare_experience}</p>` : ''}
+      ${listing.childcare_pricing ? `<p><strong>Pricing:</strong> $${listing.childcare_pricing}</p>` : ''}
+      ${listing.childcare_phone_number ? `<p><strong>Phone Number:</strong> ${listing.childcare_phone_number}</p>` : ''}
+      ${listing.childcare_description ? `<p><strong>Description:</strong> ${listing.childcare_description}</p>` : ''}
+      ${listing.group_name ? `<p><strong>Group Name:</strong> ${listing.group_name}</p>` : ''}
+      ${listing.group_type ? `<p><strong>Type of Group:</strong> ${listing.group_type}</p>` : ''}
+      ${listing.group_meeting_location ? `<p><strong>Meeting Location:</strong> ${listing.group_meeting_location}</p>` : ''}
+      ${listing.group_meeting_time ? `<p><strong>Meeting Time:</strong> ${listing.group_meeting_time}</p>` : ''}
+      ${listing.group_size ? `<p><strong>Group Size:</strong> ${listing.group_size}</p>` : ''}
+      ${listing.group_membership_requirements ? `<p><strong>Membership Requirements:</strong> ${listing.group_membership_requirements}</p>` : ''}
+      ${listing.group_cost ? `<p><strong>Cost:</strong> $${listing.group_cost}</p>` : ''}
+      ${listing.group_phone_number ? `<p><strong>Phone Number:</strong> ${listing.group_phone_number}</p>` : ''}
+    </div>
+  `);
+});
+}
+
+      }
+  
+      // Load listings on page load
+      $.get('/api/community', function (data) {
+        allListings = data.listings || [];
+        renderListings("All");
+      }).fail(function () {
+        $('#listing-container').html('<p>Failed to load listings.</p>');
+      });
+  
+      // Handle tab clicks
+      $(document).on('click', '.tab-button', function () {
+        $('.tab-button').removeClass('active');
+        $(this).addClass('active');
+        const category = $(this).data('category');
+        renderListings(category);
+      });
+    });
+  </script>  
+</body>
+</html>

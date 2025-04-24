@@ -112,16 +112,16 @@
   </header>
 
   <main>
-    <h2>For Sale Listings</h2>
+    <h2>Job Listings</h2>
 
     <!-- Tabs for categories -->
     <div id="tabs">
       <button class="tab-button active" data-category="All">All</button>
-      <button class="tab-button" data-category="Cars + Trucks">Cars + Trucks</button>
-      <button class="tab-button" data-category="Motorcycles">Motorcycles</button>
-      <button class="tab-button" data-category="Boats">Boats</button>
-      <button class="tab-button" data-category="Book">Books</button>
-      <button class="tab-button" data-category="Furniture">Furniture</button>
+      <button class="tab-button" data-category="Customer Service">Customer Service</button>
+      <button class="tab-button" data-category="Health care">Health care</button>
+      <button class="tab-button" data-category="IT/Tech">IT/Tech</button>
+      <button class="tab-button" data-category="Construction">Construction</button>
+      <button class="tab-button" data-category="Retail">Retail</button>
     </div>
 
     <!-- Listings container -->
@@ -147,28 +147,39 @@
               listing.category && listing.category.toLowerCase() === category.toLowerCase()
             );
   
-        if (filtered.length === 0) {
-          container.append('<p>No listings available for this category.</p>');
-        } else {
-          filtered.forEach(listing => {
-            let displayTitle = listing.title || listing.make_model || listing.type || listing.material || 'Listing';
-            container.append(`
-              <div class="listing">
-                <h3>${displayTitle}</h3>
-                <p><strong>Category:</strong> ${listing.category}</p>
-                ${listing.image_url ? `<img src="${listing.image_url}" alt="Listing image" style="max-width: 100%; height: auto; margin-top: 10px;">` : ''}
-                <p><strong>Description:</strong> ${listing.description || 'No description'}</p>
-                ${listing.price ? `<p><strong>Price:</strong> $${listing.price}</p>` : ''}
-                ${listing.city ? `<p><strong>City:</strong> ${listing.city}</p>` : ''}
-                ${listing.phone_number ? `<p><strong>Contact:</strong> ${listing.phone_number}</p>` : ''}
-              </div>
-            `);
-          });
-        }
+            if (filtered.length === 0) {
+  container.append('<p>No listings available for this category.</p>');
+} else {
+  filtered.forEach(listing => {
+  let displayTitle = listing.job_title || listing.category || 'Job Listing';
+  $('#listing-container').append(`
+    <div class="listing">
+      <h3>${displayTitle}</h3>
+      <p><strong>Category:</strong> ${listing.category}</p>
+      ${listing.image_url ? `<img src="${listing.image_url}" alt="Listing image" style="max-width: 100%; height: auto; margin-top: 10px;">` : ''}
+      <p><strong>Company:</strong> ${listing.company_name || 'Not provided'}</p>
+      <p><strong>Location:</strong> ${listing.location || 'Not provided'}</p>
+      <p><strong>Salary/Pay:</strong> ${listing.salary_pay || 'Not provided'}</p>
+      <p><strong>Job Type:</strong> ${listing.job_type || 'Not specified'}</p>
+      ${listing.experience_required ? `<p><strong>Experience Required:</strong> ${listing.experience_required}</p>` : ''}
+      ${listing.qualifications ? `<p><strong>Qualifications:</strong> ${listing.qualifications}</p>` : ''}
+      ${listing.working_hours ? `<p><strong>Working Hours:</strong> ${listing.working_hours}</p>` : ''}
+      ${listing.license_certifications ? `<p><strong>License/Certifications:</strong> ${listing.license_certifications}</p>` : ''}
+      ${listing.shift_information ? `<p><strong>Shift Information:</strong> ${listing.shift_information}</p>` : ''}
+      ${listing.skills_technologies ? `<p><strong>Skills/Technologies:</strong> ${listing.skills_technologies}</p>` : ''}
+      ${listing.education_certifications ? `<p><strong>Education/Certifications:</strong> ${listing.education_certifications}</p>` : ''}
+      ${listing.tools_equipment ? `<p><strong>Tools/Equipment:</strong> ${listing.tools_equipment}</p>` : ''}
+      <p><strong>Description:</strong> ${listing.job_description || 'No description provided.'}</p>
+      <p><strong>Phone Number:</strong> ${listing.phone_number || 'N/A'}</p>
+    </div>
+  `);
+});
+}
+
       }
   
       // Load listings on page load
-      $.get('/api/for-sale', function (data) {
+      $.get('/api/jobs', function (data) {
         allListings = data.listings || [];
         renderListings("All");
       }).fail(function () {
