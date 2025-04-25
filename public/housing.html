@@ -129,7 +129,7 @@
     </div>
 
     <div id="addListing">
-      <button class="tab-button" data-category="Add Listing">+ Add Listing</button>
+      <button onclick="toaddListing()">+ Add Listing</button>
     </div>
 
     <!-- Listings container -->
@@ -140,8 +140,12 @@
     &copy; 2025 Local Listings. All rights reserved.
   </footer>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js">  </script>
   <script>
+    function toaddListing() {
+            window.location.href = 'addListing.html'; // Adjust the URL as needed for your login page
+      }
+      
     $(document).ready(function () {
       const user = JSON.parse(localStorage.getItem('user'));
       if(user){
@@ -151,7 +155,8 @@
       }
 
       let allListings = [];
-  
+      
+      
       function renderListings(category) {
         const container = $('#listing-container');
         container.empty();

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Add House for Sale</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background: #f9f9f9;
+    }
+    h2 {
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 15px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Add a House for Sale</h2>
+
+  <form id="houseForm">
+    <label for="price">Price ($)</label>
+    <input type="number" id="price" name="price" required>
+
+    <label for="location">Location</label>
+    <input type="text" id="location" name="location" required>
+
+    <label for="bedrooms">Bedrooms</label>
+    <input type="number" id="bedrooms" name="bedrooms" required>
+
+    <label for="bathrooms">Bathrooms</label>
+    <input type="number" id="bathrooms" name="bathrooms" required>
+
+    <label for="sqft">Square Footage</label>
+    <input type="number" id="sqft" name="sqft" required>
+
+    <label for="lotSize">Lot Size (sq ft)</label>
+    <input type="number" id="lotSize" name="lotSize" required>
+
+    <label for="yearBuilt">Year Built</label>
+    <input type="number" id="yearBuilt" name="yearBuilt" required>
+
+    <label for="description">Description</label>
+    <textarea id="description" name="description" rows="5" required></textarea>
+
+    <button type="submit">Submit Listing</button>
+    <div class="error" id="errorMessage"></div>
+  </form>
+
+  <script>
+    document.getElementById('houseForm').addEventListener('submit', async function(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      const type = 'forSale';
+      const price = document.getElementById('price').value;
+      const location = document.getElementById('location').value;
+      const bedrooms = document.getElementById('bedrooms').value;
+      const bathrooms = document.getElementById('bathrooms').value;
+      const sqft = document.getElementById('sqft').value;
+      const lotSize = document.getElementById('lotSize').value;
+      const yearBuilt = document.getElementById('yearBuilt').value;
+      const description = document.getElementById('description').value;
+      const errorMessage = document.getElementById('errorMessage');
+
+      try {
+        const response = await fetch('https://proj4-456020.uc.r.appspot.com/api/housing/forSale', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            type, price, location, bedrooms, bathrooms, sqft, lotSize, yearBuilt, description
+          }),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          window.location.href = 'housing.html'; // Redirect on success
+        } else {
+          errorMessage.textContent = result.error || 'Something went wrong.';
+        }
+      } catch (error) {
+        errorMessage.textContent = 'An error occurred. Please try again.';
+      }
+    });
+  </script>
+
+</body>
+</html>

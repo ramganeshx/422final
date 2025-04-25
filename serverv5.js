@@ -69,6 +69,33 @@ app.post('/api/login', (req, res) => {
   });
 });
 
+app.post('/api/housing/forSale', (req, res) => {
+  const {type, price, location, bedrooms, bathrooms, squarefeet, lotSize, yearBuilt, description} = req.body
+
+  if(!type || !price || !location || !bedrooms || !bathrooms || !squarefeet || !lotSize || !yearBuilt || !description){
+    return res.status(400).json({error: 'need all fields'});
+  }
+  pool.getConnection((err, connection) => {
+    if (err) {
+      console.error('Error getting connection from pool:', err.stack);
+      return res.status(500).json({ error: 'Database connection failed' });
+    }
+    const insertQuery = 'INSERT INTO housing (type, price, location, bedrooms, bathrooms, squarefeet, lotSize, yearBuilt, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    connection.execute(insertQuery, [id, type, price, location, bedrooms, bathrooms, squarefeet, lotSize, yearBuilt, description], (err, results) => {
+      connection.release(); // Release the connection back to the pool
+
+      if (err) {
+        console.error('Error executing insert query:', err);
+        return res.status(500).json({ error: 'Failed to create user' });
+      }
+
+      return res.status(201).json({ message: 'For Sale Listing created successfully' });
+    });
+
+  });
+
+});
+
 
 app.post('/api/signup', (req, res) => {
   const { username, password } = req.body;
