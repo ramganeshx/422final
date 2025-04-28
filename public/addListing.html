@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Your Listing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background: #333;
+            color: white;
+            padding: 1em;
+            text-align: center;
+        }
+
+        nav {
+            margin-top: 10px;
+        }
+
+        nav a {
+            margin: 0 15px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 2em;
+            text-align: center;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        #listing-container {
+            margin-top: 20px;
+        }
+
+        footer {
+            background: #eee;
+            padding: 1em;
+            text-align: center;
+            color: #777;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        #addListing {
+            display: block; /* Ensure it displays */
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="./for-sale.html">For Sale</a>
+            <a href="./housing.html">Housing</a>
+            <a href="./services.html">Services</a>
+            <a href="./jobs.html">Jobs</a>
+            <a href="./community.html">Community</a>
+            <div id="logout-container" style="display: inline-block;"></div>
+        </nav>
+    </header>
+
+    <main>
+        <div id="addListing"> 
+            <h3>Add a New Listing</h3>
+            <form id="add-listing-form" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="main-category">Select Main Category:</label>
+                    <select id="main-category" name="mainCategory" required>
+                        <option value="">Select Main Category</option>
+                        <option value="For Sale">For Sale</option>
+                        <option value="Housing">Housing</option>
+                        <option value="Services">Services</option>
+                        <option value="Jobs">Jobs</option>
+                        <option value="Community">Community</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="sub-category">Select Subcategory:</label>
+                    <select id="sub-category" name="subCategory" required disabled>
+                        <option value="">Select Subcategory</option>
+                    </select>
+                </div>
+
+                <div id="dynamic-fields"></div>
+
+                <div class="form-group">
+                    <label for="image">Upload Photo:</label><br>
+                    <input type="file" id="image" name="image" accept="image/*" required><br><br>
+                </div>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Check if content is being loaded
+            console.log("Page loaded");
+
+            function updateSubcategories(mainCategory) {
+                const subcategorySelect = $('#sub-category');
+                subcategorySelect.empty();
+                subcategorySelect.prop('disabled', false);
+
+                const subcategories = {
+                    "For Sale": ["Cars + Trucks", "Motorcycles", "Boats", "Books", "Furniture"],
+                    "Housing": ["House For Sale", "House For Rent", "Apartment", "Sublets", "Mobile Homes"],
+                    "Services": ["Cleaning", "Lawn & Garden", "Home Repair", "Tutoring", "Computer/Tech help"],
+                    "Jobs": ["Customer Service", "Health Care", "IT/Tech", "Construction", "Retail"],
+                    "Community": ["Events", "Volunteer", "Classes/Workshops", "Childcare", "Groups"]
+                };
+
+                const selectedSubcategories = subcategories[mainCategory] || [];
+                selectedSubcategories.forEach(sub => {
+                    subcategorySelect.append(`<option value="${sub}">${sub}</option>`);
+                });
+            }
+
+            $('#main-category').on('change', function () {
+                updateSubcategories($(this).val());
+            });
+
+            $('#sub-category').on('change', function () {
+                generateFields($(this).val());
+            });
+
+            function generateFields(subCategory) {
+                const fieldsContainer = $('#dynamic-fields');
+                fieldsContainer.empty();
+
+                const fieldTemplates = {
+                    "Cars + Trucks": ["Year Built", "Make/Model", "Color", "Type", "Condition", "Price", "Description", "City", "Phone number"],
+                    "Motorcycles": ["Year Built", "Make/Model", "Color", "Type", "Condition", "Price", "Description", "City", "Phone number"],
+                    "Books": ["Title", "Author", "Genre", "Condition", "Publish Date", "Publishing Company", "Hard/Soft Cover", "Description"],
+                    "Furniture": ["Type", "Material", "Condition", "Dimensions", "Color", "Location", "Description", "Phone number"],
+                    "House For Sale": ["Price", "Location", "Bedrooms", "Bathrooms", "Square Footage", "Lot Size", "Year Built", "Description"],
+                    "House For Rent": ["Price", "Location", "Bedrooms", "Bathrooms", "Square Footage", "Lot Size", "Year Built", "Lease length", "Description"],
+                    "Apartment": ["Price", "Location", "Bedrooms", "Bathrooms", "Square Footage", "Availability", "Furnished", "Pet-Friendly", "Description"],
+                    "Sublets": ["Price", "Location", "Bedrooms", "Bathrooms", "Square Footage", "Availability", "Furnished", "Pet-Friendly", "Description"],
+                    "Mobile Homes": ["Price", "Location", "Year manufactured", "Bedrooms", "Bathrooms", "Square Footage", "Condition", "Lot rent", "Description"],
+                    "Cleaning": ["Service Type", "Price per hour", "Duration", "Frequency", "Areas Served", "Experience", "Service Details", "Availability", "Phone number"],
+                    "Lawn & Garden": ["Service Type", "Price per hour", "Frequency", "Areas Served", "Experience", "Equipment used", "Service Details", "Availability", "Phone number"],
+                    "Home Repair": ["Service Type", "Price per hour", "Frequency", "Areas Served", "Experience", "Licensed & Insured", "Service Details", "Tools & Materials Provided", "Phone number"],
+                    "Tutoring": ["Subject Area", "Price per hour", "Level", "Experience", "Location", "Availability", "Session Length", "Phone Number"],
+                    "Computer/Tech help": ["Service Type", "Price", "Experience", "Location", "Availability", "Service Details", "Equipment & Tools", "Phone Number"],
+                    "Customer Service": ["Job Title", "Company Name", "Location", "Salary/Pay", "Job Type", "Experience Required", "Qualifications", "Working Hours", "Job Description", "Phone Number"],
+                    "Health care": ["Job Title", "Company Name", "Location", "Salary/Pay", "Job Type", "Experience Required", "License/Certifications", "Shift Information", "Job Description"],
+                    "IT/Tech": ["Job Title", "Company Name", "Location", "Salary/Pay", "Job Type", "Required Skills/Technologies", "Education/Certifications", "Job Description", "Phone Number"],
+                    "Construction": ["Job Title", "Company Name", "Location", "Salary/Pay", "Job Type", "Experience Required", "Required Skills/Certifications", "Tools/Equipment", "Job Description", "Phone Number"],
+                    "Retail": ["Job Title", "Company Name", "Location", "Salary/Pay", "Job Type", "Experience Required", "Required Skills", "Shift Information", "Job Description", "Phone Number"],
+                    "Events": ["Event Name", "Date", "Time", "Location", "Type of Event", "Admission Fee", "Host/Organizer", "Contact Info", "Registration/RSVP Info", "Description"],
+                    "Volunteer": ["Opportunity Title", "Organization Name", "Location", "Date(s)", "Time(s)", "Type of Work", "Required Skills", "Commitment Level", "Age Requirement"],
+                    "Classes/Workshops": ["Title", "Instructor/Host", "Location", "Date(s)", "Time(s)", "Skill Level", "Materials Needed", "Age Requirement", "Phone Number", "Description"],
+                    "Childcare": ["Service Type", "Caregiver Name or Business", "Location", "Availability", "Age Range Accepted", "Experience/Qualifications", "Pricing", "Phone Number", "Description"],
+                    "Groups": ["Group Name", "Type of Group", "Meeting Location", "Meeting Time", "Group Size", "Membership Requirements", "Cost", "Phone Number"]
+                };
+
+                const selectedFields = fieldTemplates[subCategory] || [];
+
+                selectedFields.forEach(field => {
+                    let nameAttr = field.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z_]/g, '');
+                    fieldsContainer.append(`
+                        <div class="form-group">
+                            <label for="${nameAttr}">${field}:</label>
+                            <input type="text" id="${nameAttr}" name="${nameAttr}" required>
+                        </div>
+                    `);
+                });
+            }
+
+            function handleSubmit() {
+                const formData = new FormData($('#add-listing-form')[0]);
+
+                fetch('/api/listings', {
+                    method: 'POST',
+                    body: formData,
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Listing added successfully!');
+                        } else {
+                            alert('Failed to add listing.');
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+
+            $('#add-listing-form').on('submit', function (e) {
+                e.preventDefault();
+                handleSubmit();
+            });
+        });
+
+        function checkUserAndShowLogout() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            const logoutContainer = document.getElementById('logout-container');
+            if (user) {
+                const logoutLink = document.createElement('a');
+                logoutLink.textContent = 'Logout';
+                logoutLink.href = '#';
+                logoutLink.style.margin = '0 15px';
+                logoutLink.style.color = 'white';
+                logoutLink.style.textDecoration = 'none';
+                logoutLink.style.fontWeight = 'bold';
+
+                logoutLink.onclick = function (e) {
+                    e.preventDefault();
+                    localStorage.removeItem('user');
+                    window.location.href = 'index.html'; 
+                };
+
+                logoutContainer.appendChild(logoutLink);
+            }
+        }
+
+        window.onload = checkUserAndShowLogout;
+    </script>
+</body>
+</html>

@@ -111,7 +111,8 @@
       <a href="./services.html">Services</a>
       <a href="./jobs.html">Jobs</a>
       <a href="./community.html">Community</a>
-      <a href="./index.html">Logout</a>
+      <div id="logout-container" style="display: inline-block;"></div>
+      <div id="addListing-container" style="display: inline-block;"></div>
     </nav>
   </header>
 
@@ -208,6 +209,75 @@
         renderListings(category);
       });
     });
+
+        //check if user is visitor or not and display login button
+        function checkUserAndShowLogout() {
+        const user = JSON.parse(localStorage.getItem('user'));
+        const logoutContainer = document.getElementById('logout-container');
+        const listingContainer = document.getElementById('addListing-container');
+        if (user) {
+          const logoutLink = document.createElement('a');
+          const listingLink= document.createElement('a');
+            logoutLink.textContent = 'Logout';
+            logoutLink.href = '#';
+            logoutLink.style.margin = '0 15px';
+            logoutLink.style.color = 'white';
+            logoutLink.style.textDecoration = 'none';
+            logoutLink.style.fontWeight = 'bold';
+
+            listingLink.textContent = 'Add Listing';
+            listingLink.href = '#';
+            listingLink.style.margin = '0 15px';
+            listingLink.style.color = 'white';
+            listingLink.style.textDecoration = 'none';
+            listingLink.style.fontWeight = 'bold';
+
+            logoutLink.onmouseover = function() {
+                logoutLink.style.textDecoration = 'underline';
+            };
+            logoutLink.onmouseout = function() {
+                logoutLink.style.textDecoration = 'none';
+            };
+
+            logoutLink.onclick = function(e) {
+                e.preventDefault();
+                localStorage.removeItem('user');
+                window.location.href = 'index.html'; 
+            };
+
+            listingLink.onmouseover = function() {
+              listingLink.style.textDecoration = 'underline';
+            };
+            listingLink.onmouseout = function() {
+              listingLink.style.textDecoration = 'none';
+            };
+
+            listingLink.onclick = function(e) {
+                e.preventDefault();
+                window.location.href = 'addListing.html'; 
+            };
+
+            logoutContainer.appendChild(logoutLink);
+            listingContainer.appendChild(listingLink);
+        }else{
+          const logoutLink = document.createElement('a');
+          logoutLink.textContent = 'Login';
+          logoutLink.href = '#';
+          logoutLink.style.margin = '0 15px';
+          logoutLink.style.color = 'white';
+          logoutLink.style.textDecoration = 'none';
+          logoutLink.style.fontWeight = 'bold';
+
+          logoutLink.onclick = function (e) {
+            e.preventDefault();
+            window.location.href = 'index.html'; 
+          };
+
+          logoutContainer.appendChild(logoutLink);
+        }
+    }
+
+    window.onload = checkUserAndShowLogout;
   </script>  
 </body>
 </html>
