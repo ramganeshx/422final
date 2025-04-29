@@ -169,6 +169,7 @@
 
             $('#main-category').on('change', function () {
                 updateSubcategories($(this).val());
+                generateFields($('#sub-category').val())
             });
 
             $('#sub-category').on('change', function () {
@@ -182,6 +183,7 @@
                 const fieldTemplates = {
                     "Cars + Trucks": ["Year Built", "Make/Model", "Color", "Type", "Condition", "Price", "Description", "City", "Phone number"],
                     "Motorcycles": ["Year Built", "Make/Model", "Color", "Type", "Condition", "Price", "Description", "City", "Phone number"],
+                    "Boats": ["Year Built", "Make/Model", "Color", "Type", "Condition", "Price", "Description", "City", "Phone number"],
                     "Books": ["Title", "Author", "Genre", "Condition", "Publish Date", "Publishing Company", "Hard/Soft Cover", "Description"],
                     "Furniture": ["Type", "Material", "Condition", "Dimensions", "Color", "Location", "Description", "Phone number"],
                     "House For Sale": ["Price", "Location", "Bedrooms", "Bathrooms", "Square Footage", "Lot Size", "Year Built", "Description"],
@@ -195,7 +197,7 @@
                     "Tutoring": ["Subject Area", "Price per hour", "Level", "Experience", "Location", "Availability", "Session Length", "Phone Number"],
                     "Computer/Tech help": ["Service Type", "Price", "Experience", "Location", "Availability", "Service Details", "Equipment & Tools", "Phone Number"],
                     "Customer Service": ["Job Title", "Company Name", "Location", "Salary/Pay", "Job Type", "Experience Required", "Qualifications", "Working Hours", "Job Description", "Phone Number"],
-                    "Health care": ["Job Title", "Company Name", "Location", "Salary/Pay", "Job Type", "Experience Required", "License/Certifications", "Shift Information", "Job Description"],
+                    "Health Care": ["Job Title", "Company Name", "Location", "Salary/Pay", "Job Type", "Experience Required", "License/Certifications", "Shift Information", "Job Description"],
                     "IT/Tech": ["Job Title", "Company Name", "Location", "Salary/Pay", "Job Type", "Required Skills/Technologies", "Education/Certifications", "Job Description", "Phone Number"],
                     "Construction": ["Job Title", "Company Name", "Location", "Salary/Pay", "Job Type", "Experience Required", "Required Skills/Certifications", "Tools/Equipment", "Job Description", "Phone Number"],
                     "Retail": ["Job Title", "Company Name", "Location", "Salary/Pay", "Job Type", "Experience Required", "Required Skills", "Shift Information", "Job Description", "Phone Number"],
@@ -220,11 +222,25 @@
             }
 
             function handleSubmit() {
-                const formData = new FormData($('#add-listing-form')[0]);
+                const formArray = $('#add-listing-form').serializeArray();
+                const photoID = Math.floor(Math.random() * 1200 + 3);
+                const formObject = {};
 
-                fetch('/api/listings', {
+                formArray.forEach(item => {
+                    formObject[item.name] = item.value;
+                });
+
+
+                const formJSON = JSON.stringify(formObject);
+                console.log(formJSON);
+
+                const sendData = new FormData();
+                sendData.append('json', formJSON);
+                sendData.append('image',  document.getElementById('image').files[0])
+
+                fetch('https://proj4-456020.uc.r.appspot.com/api/listing', {
                     method: 'POST',
-                    body: formData,
+                    body: sendData,
                 })
                     .then(response => response.json())
                     .then(data => {

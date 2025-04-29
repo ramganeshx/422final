@@ -159,25 +159,50 @@
         const filtered = category.toLowerCase() === "all"
           ? allListings
           : allListings.filter(listing =>
-              listing.category && listing.category.toLowerCase() === category.toLowerCase()
-            );
-  
+              listing.sub === category);
+
         if (filtered.length === 0) {
           container.append('<p>No listings available for this category.</p>');
         } else {
+          function makeItem(jsonObject, imageURL) {
+            const containerDiv = document.createElement('div');
+
+            // Apply styling for alignment and background
+            containerDiv.style.backgroundColor = '#f5f5f5'; // light grey
+            containerDiv.style.textAlign = 'left';
+            containerDiv.style.padding = '15px';
+            containerDiv.style.borderRadius = '8px';
+            containerDiv.style.marginBottom = '15px';
+
+            const header = document.createElement('h3');
+            header.textContent = jsonObject.mainCategory;
+            containerDiv.appendChild(header);
+
+            const subCategory = document.createElement('p');
+            subCategory.innerHTML = `<strong>Category:</strong> ${jsonObject.subCategory}`;
+            containerDiv.appendChild(subCategory);
+
+            const image = document.createElement('img');
+            image.src = imageURL;
+            image.alt = "Listing image";
+            image.style.maxWidth = '60%';
+            image.style.height = 'auto';
+            image.style.marginTop = '10px';
+            containerDiv.appendChild(image);
+
+            for (const [key, value] of Object.entries(jsonObject)) {
+              if (key === "mainCategory" || key === "subCategory") continue;
+
+              const p = document.createElement('p');
+              p.innerHTML = `<strong>${key}:</strong> ${value}`;
+              containerDiv.appendChild(p);
+            }
+
+            return containerDiv;
+          }
+
           filtered.forEach(listing => {
-            let displayTitle = listing.title || listing.make_model || listing.type || listing.material || 'Listing';
-            container.append(`
-              <div class="listing">
-                <h3>${displayTitle}</h3>
-                <p><strong>Category:</strong> ${listing.category}</p>
-                ${listing.image_url ? `<img src="${listing.image_url}" alt="Listing image" style="max-width: 100%; height: auto; margin-top: 10px;">` : ''}
-                <p><strong>Description:</strong> ${listing.description || 'No description'}</p>
-                ${listing.price ? `<p><strong>Price:</strong> $${listing.price}</p>` : ''}
-                ${listing.city ? `<p><strong>City:</strong> ${listing.city}</p>` : ''}
-                ${listing.phone_number ? `<p><strong>Contact:</strong> ${listing.phone_number}</p>` : ''}
-              </div>
-            `);
+            container.append(makeItem(JSON.parse(listing.json), listing.imageUrl));
           });
         }
       }
@@ -185,6 +210,7 @@
       // Load listings on page load
       $.get('/api/for-sale', function (data) {
         allListings = data.listings || [];
+        console.log(allListings)
         renderListings("All");
       }).fail(function () {
         $('#listing-container').html('<p>Failed to load listings.</p>');

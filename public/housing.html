@@ -161,41 +161,56 @@
       function renderListings(category) {
         const container = $('#listing-container');
         container.empty();
-  
+
         const filtered = category.toLowerCase() === "all"
-          ? allListings
-          : allListings.filter(listing =>
-              listing.category && listing.category.toLowerCase() === category.toLowerCase()
-            );
+                ? allListings
+                : allListings.filter(listing =>
+                        listing.sub === category);
   
             if (filtered.length === 0) {
   container.append('<p>No listings available for this category.</p>');
 } else {
-  filtered.forEach(listing => {
-    let displayTitle = listing.category || 'Listing';
-    container.append(`
-      <div class="listing">
-        <h3>${displayTitle}</h3>
-        <p><strong>Category:</strong> ${listing.category}</p>
-        ${listing.image_url ? `<img src="${listing.image_url}" alt="Listing image" style="max-width: 100%; height: auto; margin-top: 10px;">` : ''}
-        <p><strong>Description:</strong> ${listing.description || 'No description'}</p>
-        ${listing.price ? `<p><strong>Price:</strong> $${listing.price}</p>` : ''}
-        ${listing.location ? `<p><strong>Location:</strong> ${listing.location}</p>` : ''}
-        ${listing.bedrooms ? `<p><strong>Bedrooms:</strong> ${listing.bedrooms}</p>` : ''}
-        ${listing.bathrooms ? `<p><strong>Bathrooms:</strong> ${listing.bathrooms}</p>` : ''}
-        ${listing.square_footage ? `<p><strong>Square Footage:</strong> ${listing.square_footage} sq ft</p>` : ''}
-        ${listing.lot_size ? `<p><strong>Lot Size:</strong> ${listing.lot_size}</p>` : ''}
-        ${listing.year_built ? `<p><strong>Year Built:</strong> ${listing.year_built}</p>` : ''}
-        ${listing.lease_length ? `<p><strong>Lease Length:</strong> ${listing.lease_length}</p>` : ''}
-        ${listing.availability ? `<p><strong>Availability:</strong> ${listing.availability}</p>` : ''}
-        ${listing.furnished !== undefined ? `<p><strong>Furnished:</strong> ${listing.furnished ? 'Yes' : 'No'}</p>` : ''}
-        ${listing.pet_friendly !== undefined ? `<p><strong>Pet Friendly:</strong> ${listing.pet_friendly ? 'Yes' : 'No'}</p>` : ''}
-        ${listing.condition ? `<p><strong>Condition:</strong> ${listing.condition}</p>` : ''}
-        ${listing.lot_rent ? `<p><strong>Lot Rent:</strong> $${listing.lot_rent}</p>` : ''}
-      </div>
-    `);
-  });
-}
+              function makeItem(jsonObject, imageURL) {
+                const containerDiv = document.createElement('div');
+
+                // Apply styling for alignment and background
+                containerDiv.style.backgroundColor = '#f5f5f5'; // light grey
+                containerDiv.style.textAlign = 'left';
+                containerDiv.style.padding = '15px';
+                containerDiv.style.borderRadius = '8px';
+                containerDiv.style.marginBottom = '15px';
+
+                const header = document.createElement('h3');
+                header.textContent = jsonObject.mainCategory;
+                containerDiv.appendChild(header);
+
+                const subCategory = document.createElement('p');
+                subCategory.innerHTML = `<strong>Category:</strong> ${jsonObject.subCategory}`;
+                containerDiv.appendChild(subCategory);
+
+                const image = document.createElement('img');
+                image.src = imageURL;
+                image.alt = "Listing image";
+                image.style.maxWidth = '60%';
+                image.style.height = 'auto';
+                image.style.marginTop = '10px';
+                containerDiv.appendChild(image);
+
+                for (const [key, value] of Object.entries(jsonObject)) {
+                  if (key === "mainCategory" || key === "subCategory") continue;
+
+                  const p = document.createElement('p');
+                  p.innerHTML = `<strong>${key}:</strong> ${value}`;
+                  containerDiv.appendChild(p);
+                }
+
+                return containerDiv;
+              }
+
+              filtered.forEach(listing => {
+                container.append(makeItem(JSON.parse(listing.json), listing.imageUrl));
+              });
+            }
 
       }
   

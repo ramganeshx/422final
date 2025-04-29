@@ -5,6 +5,8 @@ const multer = require('multer');
 const { Storage } = require('@google-cloud/storage');
 const path = require('path');
 const src = path.join(__dirname, "views");
+const { v4: uuidv4 } = require('uuid');
+
 
 
 const app = express();
@@ -14,9 +16,7 @@ app.use(express.json()); // Add this to parse JSON bodies
 
 
 // Google Cloud Storage configuration
-const storage = new Storage({
-  keyFilename: './proj4-456020-783da00b791b.json', // Replace with your service account key file path
-});
+const storage = new Storage();
 const bucketName = '422proj4-bucket'; // Replace with your Google Cloud Storage bucket name
 const bucket = storage.bucket(bucketName);
 
@@ -69,33 +69,6 @@ app.post('/api/login', (req, res) => {
   });
 });
 
-app.post('/api/housing/forSale', (req, res) => {
-  const {type, price, location, bedrooms, bathrooms, squarefeet, lotSize, yearBuilt, description} = req.body
-
-  if(!type || !price || !location || !bedrooms || !bathrooms || !squarefeet || !lotSize || !yearBuilt || !description){
-    return res.status(400).json({error: 'need all fields'});
-  }
-  pool.getConnection((err, connection) => {
-    if (err) {
-      console.error('Error getting connection from pool:', err.stack);
-      return res.status(500).json({ error: 'Database connection failed' });
-    }
-    const insertQuery = 'INSERT INTO housing (type, price, location, bedrooms, bathrooms, squarefeet, lotSize, yearBuilt, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
-    connection.execute(insertQuery, [id, type, price, location, bedrooms, bathrooms, squarefeet, lotSize, yearBuilt, description], (err, results) => {
-      connection.release(); // Release the connection back to the pool
-
-      if (err) {
-        console.error('Error executing insert query:', err);
-        return res.status(500).json({ error: 'Failed to create user' });
-      }
-
-      return res.status(201).json({ message: 'For Sale Listing created successfully' });
-    });
-
-  });
-
-});
-
 
 app.post('/api/signup', (req, res) => {
   const { username, password } = req.body;
@@ -143,97 +116,62 @@ app.post('/api/signup', (req, res) => {
   });
 });
 
-
-// API Route to upload photo
-app.post('/api/upload', upload.single('imgfile'), async (req, res) => {
-  const userId = req.body.userId;  // The user ID should be sent along with the photo
-  const file = req.file;
-  const photoName = req.body.photoName;
-
-  if (!userId || !file) {
-    return res.status(400).json({ error: 'User ID and photo are required' });
-  }
-
+app.post('/api/listing', upload.single('image'), async (req, res) => {
   try {
-    console.log("File found, attempting upload...");
+    const jsonData = JSON.parse(req.body.json);
 
-    const blob = bucket.file(file.originalname);
+    const blob = bucket.file(`uploads/${uuidv4()}_${req.file.originalname}`);
     const blobStream = blob.createWriteStream({
-      metadata: {
-        contentType: file.mimetype, // Use the MIME type of the uploaded file
-      },
+      resumable: false,
+      contentType: req.file.mimetype,
     });
+
     blobStream.on('finish', async () => {
       try {
-
+        await blob.makePublic();
         const publicUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
-        // Save the photo metadata in the database
+
+        const main = jsonData.mainCategory;
+        const sub = jsonData.subCategory;
+
+        const insertQuery = 'INSERT INTO items (main, sub, json, imageUrl) VALUES (?, ?, ?, ?)';
         pool.getConnection((err, connection) => {
           if (err) {
             console.error('Error getting connection from pool:', err.stack);
             return res.status(500).json({ error: 'Database connection failed' });
           }
 
-          const query = 'INSERT INTO photos (user_id, photo_url, photo_name) VALUES (?, ?, ?);';
-          connection.execute(query, [userId, publicUrl, photoName], (err, results) => {
-            connection.release();  // Release the connection back to the pool
+          connection.execute(insertQuery, [main, sub, JSON.stringify(jsonData), publicUrl], (err, results) => {
+            connection.release();
 
             if (err) {
-              console.error('Error saving photo to database:', err);
-              return res.status(500).json({ error: 'Failed to save photo to database' });
+              console.error('Error executing insert query:', err);
+              return res.status(500).json({ error: 'Failed to add item' });
             }
 
-            return res.status(200).json({ message: 'Photo uploaded successfully', photoUrl: publicUrl });
+            return res.status(201).json({ success: true, message: 'Item created successfully', listing: jsonData });
           });
         });
-
-        console.log("File uploaded successfully!");
       } catch (error) {
-        console.error("Error during upload:", error);
-        res.status(500).send("Error setting ACL or saving file.");
+        console.error('Upload Finish Error:', error);
+        return res.status(500).json({ success: false, message: 'Failed after uploading image.' });
       }
     });
 
-    blobStream.on('error', (error) => {
-      console.error("Error during upload:", error);
-      res.status(500).send(error);
+    blobStream.on('error', (err) => {
+      console.error('Upload Error:', err);
+      return res.status(500).json({ success: false, message: 'Failed to upload image.' });
     });
 
-    // Write the file buffer to the stream
-    blobStream.end(file.buffer);
+    blobStream.end(req.file.buffer);
+
   } catch (error) {
-    console.error('Error uploading file:', error);
-    return res.status(500).json({ error: 'Failed to upload photo to Cloud Storage' });
-  }
-});
-
-// API Route to fetch user photos
-app.get('/api/photos', (req, res) => {
-  const userId = req.query.userId;
-
-  if (!userId) {
-    return res.status(400).json({ error: 'User ID is required' });
+    console.error('Server Error:', error);
+    return res.status(500).json({ success: false, message: 'Server error.' });
   }
 
-  pool.getConnection((err, connection) => {
-    if (err) {
-      console.error('Error getting connection from pool:', err.stack);
-      return res.status(500).json({ error: 'Database connection failed' });
-    }
-
-    const query = 'SELECT * FROM photos WHERE user_id = ?';
-    connection.execute(query, [userId], (err, results) => {
-      connection.release();  // Release the connection back to the pool
-
-      if (err) {
-        console.error('Error fetching photos:', err);
-        return res.status(500).json({ error: 'Failed to fetch photos' });
-      }
-
-      return res.status(200).json({ photos: results });
-    });
-  });
 });
+
 
 // API Route to fetch "For Sale" listings
 app.get('/api/for-sale', (req, res) => {
@@ -243,7 +181,7 @@ app.get('/api/for-sale', (req, res) => {
       return res.status(500).json({ error: 'Database connection failed' });
     }
 
-    const query = 'SELECT * FROM for_sale';
+    const query = "SELECT * FROM items WHERE main='For Sale'";
     connection.execute(query, [], (err, results) => {
       connection.release();  // Release the connection back to the pool
 
@@ -265,7 +203,7 @@ app.get('/api/housing', (req, res) => {
       return res.status(500).json({ error: 'Database connection failed' });
     }
 
-    const query = 'SELECT * FROM housing';
+    const query = "SELECT * FROM items WHERE main='Housing'";
     connection.execute(query, [], (err, results) => {
       connection.release();  // Release the connection back to the pool
 
@@ -287,7 +225,7 @@ app.get('/api/services', (req, res) => {
       return res.status(500).json({ error: 'Database connection failed' });
     }
 
-    const query = 'SELECT * FROM services';
+    const query = "SELECT * FROM items WHERE main='Services'";
     connection.execute(query, [], (err, results) => {
       connection.release();  // Release the connection back to the pool
 
@@ -309,7 +247,7 @@ app.get('/api/jobs', (req, res) => {
       return res.status(500).json({ error: 'Database connection failed' });
     }
 
-    const query = 'SELECT * FROM jobs';
+    const query = "SELECT * FROM items WHERE main='Jobs'";
     connection.execute(query, [], (err, results) => {
       connection.release();  // Release the connection back to the pool
 
@@ -331,7 +269,7 @@ app.get('/api/community', (req, res) => {
       return res.status(500).json({ error: 'Database connection failed' });
     }
 
-    const query = 'SELECT * FROM community';
+    const query = "SELECT * FROM items WHERE main='Community'";
     connection.execute(query, [], (err, results) => {
       connection.release();  // Release the connection back to the pool
 

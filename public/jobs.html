@@ -156,42 +156,56 @@
       function renderListings(category) {
         const container = $('#listing-container');
         container.empty();
-  
+
         const filtered = category.toLowerCase() === "all"
-          ? allListings
-          : allListings.filter(listing =>
-              listing.category && listing.category.toLowerCase() === category.toLowerCase()
-            );
+                ? allListings
+                : allListings.filter(listing =>
+                        listing.sub === category);
   
             if (filtered.length === 0) {
   container.append('<p>No listings available for this category.</p>');
 } else {
-  filtered.forEach(listing => {
-  let displayTitle = listing.job_title || listing.category || 'Job Listing';
-  $('#listing-container').append(`
-    <div class="listing">
-      <h3>${displayTitle}</h3>
-      <p><strong>Category:</strong> ${listing.category}</p>
-      ${listing.image_url ? `<img src="${listing.image_url}" alt="Listing image" style="max-width: 100%; height: auto; margin-top: 10px;">` : ''}
-      <p><strong>Company:</strong> ${listing.company_name || 'Not provided'}</p>
-      <p><strong>Location:</strong> ${listing.location || 'Not provided'}</p>
-      <p><strong>Salary/Pay:</strong> ${listing.salary_pay || 'Not provided'}</p>
-      <p><strong>Job Type:</strong> ${listing.job_type || 'Not specified'}</p>
-      ${listing.experience_required ? `<p><strong>Experience Required:</strong> ${listing.experience_required}</p>` : ''}
-      ${listing.qualifications ? `<p><strong>Qualifications:</strong> ${listing.qualifications}</p>` : ''}
-      ${listing.working_hours ? `<p><strong>Working Hours:</strong> ${listing.working_hours}</p>` : ''}
-      ${listing.license_certifications ? `<p><strong>License/Certifications:</strong> ${listing.license_certifications}</p>` : ''}
-      ${listing.shift_information ? `<p><strong>Shift Information:</strong> ${listing.shift_information}</p>` : ''}
-      ${listing.skills_technologies ? `<p><strong>Skills/Technologies:</strong> ${listing.skills_technologies}</p>` : ''}
-      ${listing.education_certifications ? `<p><strong>Education/Certifications:</strong> ${listing.education_certifications}</p>` : ''}
-      ${listing.tools_equipment ? `<p><strong>Tools/Equipment:</strong> ${listing.tools_equipment}</p>` : ''}
-      <p><strong>Description:</strong> ${listing.job_description || 'No description provided.'}</p>
-      <p><strong>Phone Number:</strong> ${listing.phone_number || 'N/A'}</p>
-    </div>
-  `);
-});
-}
+              function makeItem(jsonObject, imageURL) {
+                const containerDiv = document.createElement('div');
 
+                // Apply styling for alignment and background
+                containerDiv.style.backgroundColor = '#f5f5f5'; // light grey
+                containerDiv.style.textAlign = 'left';
+                containerDiv.style.padding = '15px';
+                containerDiv.style.borderRadius = '8px';
+                containerDiv.style.marginBottom = '15px';
+
+                const header = document.createElement('h3');
+                header.textContent = jsonObject.mainCategory;
+                containerDiv.appendChild(header);
+
+                const subCategory = document.createElement('p');
+                subCategory.innerHTML = `<strong>Category:</strong> ${jsonObject.subCategory}`;
+                containerDiv.appendChild(subCategory);
+
+                const image = document.createElement('img');
+                image.src = imageURL;
+                image.alt = "Listing image";
+                image.style.maxWidth = '60%';
+                image.style.height = 'auto';
+                image.style.marginTop = '10px';
+                containerDiv.appendChild(image);
+
+                for (const [key, value] of Object.entries(jsonObject)) {
+                  if (key === "mainCategory" || key === "subCategory") continue;
+
+                  const p = document.createElement('p');
+                  p.innerHTML = `<strong>${key}:</strong> ${value}`;
+                  containerDiv.appendChild(p);
+                }
+
+                return containerDiv;
+              }
+
+              filtered.forEach(listing => {
+                container.append(makeItem(JSON.parse(listing.json), listing.imageUrl));
+              });
+            }
       }
   
       // Load listings on page load
