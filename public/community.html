@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>For Sale Listings</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Community Listings</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -98,8 +98,9 @@
       bottom: 0;
       width: 100%;
     }
+
     #addListing {
-        display: none; /* Initially hide the button */
+      display: none;
     }
   </style>
 </head>
@@ -119,7 +120,6 @@
   <main>
     <h2>Community Listings</h2>
 
-    <!-- Tabs for categories -->
     <div id="tabs">
       <button class="tab-button active" data-category="All">All</button>
       <button class="tab-button" data-category="Events">Events</button>
@@ -132,8 +132,7 @@
     <div id="addListing">
       <button onclick="toaddListing()">+ Add Listing</button>
     </div>
-    
-    <!-- Listings container -->
+
     <div id="listing-container"></div>
   </main>
 
@@ -143,81 +142,78 @@
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
+    function toaddListing() {
+      window.location.href = 'addListing.html';
+    }
+
     $(document).ready(function () {
       const user = JSON.parse(localStorage.getItem('user'));
-      if(user){
+      if (user) {
         document.getElementById('addListing').style.display = 'block';
-      }else{
+      } else {
         document.getElementById('addListing').style.display = 'none';
       }
 
       let allListings = [];
-  
+
       function renderListings(category) {
         const container = $('#listing-container');
         container.empty();
 
         const filtered = category.toLowerCase() === "all"
-                ? allListings
-                : allListings.filter(listing =>
-                        listing.sub === category);
-  
-            if (filtered.length === 0) {
-  container.append('<p>No listings available for this category.</p>');
-} else {
-              function makeItem(jsonObject, imageURL) {
-                const containerDiv = document.createElement('div');
+          ? allListings
+          : allListings.filter(listing => listing.sub === category);
 
-                // Apply styling for alignment and background
-                containerDiv.style.backgroundColor = '#f5f5f5'; // light grey
-                containerDiv.style.textAlign = 'left';
-                containerDiv.style.padding = '15px';
-                containerDiv.style.borderRadius = '8px';
-                containerDiv.style.marginBottom = '15px';
+        if (filtered.length === 0) {
+          container.append('<p>No listings available for this category.</p>');
+        } else {
+          function makeItem(jsonObject, imageURL) {
+            const containerDiv = document.createElement('div');
+            containerDiv.style.backgroundColor = '#f5f5f5';
+            containerDiv.style.textAlign = 'left';
+            containerDiv.style.padding = '15px';
+            containerDiv.style.borderRadius = '8px';
+            containerDiv.style.marginBottom = '15px';
 
-                const header = document.createElement('h3');
-                header.textContent = jsonObject.mainCategory;
-                containerDiv.appendChild(header);
+            const header = document.createElement('h3');
+            header.textContent = jsonObject.mainCategory;
+            containerDiv.appendChild(header);
 
-                const subCategory = document.createElement('p');
-                subCategory.innerHTML = `<strong>Category:</strong> ${jsonObject.subCategory}`;
-                containerDiv.appendChild(subCategory);
+            const subCategory = document.createElement('p');
+            subCategory.innerHTML = `<strong>Category:</strong> ${jsonObject.subCategory}`;
+            containerDiv.appendChild(subCategory);
 
-                const image = document.createElement('img');
-                image.src = imageURL;
-                image.alt = "Listing image";
-                image.style.maxWidth = '60%';
-                image.style.height = 'auto';
-                image.style.marginTop = '10px';
-                containerDiv.appendChild(image);
+            const image = document.createElement('img');
+            image.src = imageURL;
+            image.alt = "Listing image";
+            image.style.maxWidth = '60%';
+            image.style.height = 'auto';
+            image.style.marginTop = '10px';
+            containerDiv.appendChild(image);
 
-                for (const [key, value] of Object.entries(jsonObject)) {
-                  if (key === "mainCategory" || key === "subCategory") continue;
-
-                  const p = document.createElement('p');
-                  p.innerHTML = `<strong>${key}:</strong> ${value}`;
-                  containerDiv.appendChild(p);
-                }
-
-                return containerDiv;
-              }
-
-              filtered.forEach(listing => {
-                container.append(makeItem(JSON.parse(listing.json), listing.imageUrl));
-              });
+            for (const [key, value] of Object.entries(jsonObject)) {
+              if (key === "mainCategory" || key === "subCategory") continue;
+              const p = document.createElement('p');
+              p.innerHTML = `<strong>${key}:</strong> ${value}`;
+              containerDiv.appendChild(p);
             }
 
+            return containerDiv;
+          }
+
+          filtered.forEach(listing => {
+            container.append(makeItem(JSON.parse(listing.json), listing.imageUrl));
+          });
+        }
       }
-  
-      // Load listings on page load
+
       $.get('/api/community', function (data) {
         allListings = data.listings || [];
         renderListings("All");
       }).fail(function () {
         $('#listing-container').html('<p>Failed to load listings.</p>');
       });
-  
-      // Handle tab clicks
+
       $(document).on('click', '.tab-button', function () {
         $('.tab-button').removeClass('active');
         $(this).addClass('active');
@@ -226,74 +222,68 @@
       });
     });
 
-        //check if user is visitor or not and display login button
-        function checkUserAndShowLogout() {
-        const user = JSON.parse(localStorage.getItem('user'));
-        const logoutContainer = document.getElementById('logout-container');
-        const listingContainer = document.getElementById('addListing-container');
-        if (user) {
-          const logoutLink = document.createElement('a');
-          const listingLink= document.createElement('a');
-            logoutLink.textContent = 'Logout';
-            logoutLink.href = '#';
-            logoutLink.style.margin = '0 15px';
-            logoutLink.style.color = 'white';
-            logoutLink.style.textDecoration = 'none';
-            logoutLink.style.fontWeight = 'bold';
+    function checkUserAndShowLogout() {
+      const user = JSON.parse(localStorage.getItem('user'));
+      const logoutContainer = document.getElementById('logout-container');
+      const listingContainer = document.getElementById('addListing-container');
 
-            listingLink.textContent = 'Add Listing';
-            listingLink.href = '#';
-            listingLink.style.margin = '0 15px';
-            listingLink.style.color = 'white';
-            listingLink.style.textDecoration = 'none';
-            listingLink.style.fontWeight = 'bold';
+      if (user) {
+        const logoutLink = document.createElement('a');
+        const listingLink = document.createElement('a');
 
-            logoutLink.onmouseover = function() {
-                logoutLink.style.textDecoration = 'underline';
-            };
-            logoutLink.onmouseout = function() {
-                logoutLink.style.textDecoration = 'none';
-            };
+        logoutLink.textContent = 'Logout';
+        logoutLink.href = '#';
+        logoutLink.style.margin = '0 15px';
+        logoutLink.style.color = 'white';
+        logoutLink.style.textDecoration = 'none';
+        logoutLink.style.fontWeight = 'bold';
 
-            logoutLink.onclick = function(e) {
-                e.preventDefault();
-                localStorage.removeItem('user');
-                window.location.href = 'index.html'; 
-            };
+        listingLink.textContent = 'Add Listing';
+        listingLink.href = '#';
+        listingLink.style.margin = '0 15px';
+        listingLink.style.color = 'white';
+        listingLink.style.textDecoration = 'none';
+        listingLink.style.fontWeight = 'bold';
 
-            listingLink.onmouseover = function() {
-              listingLink.style.textDecoration = 'underline';
-            };
-            listingLink.onmouseout = function() {
-              listingLink.style.textDecoration = 'none';
-            };
+        logoutLink.onmouseover = listingLink.onmouseover = function () {
+          this.style.textDecoration = 'underline';
+        };
+        logoutLink.onmouseout = listingLink.onmouseout = function () {
+          this.style.textDecoration = 'none';
+        };
 
-            listingLink.onclick = function(e) {
-                e.preventDefault();
-                window.location.href = 'addListing.html'; 
-            };
+        logoutLink.onclick = function (e) {
+          e.preventDefault();
+          localStorage.removeItem('user');
+          window.location.href = 'index.html';
+        };
 
-            logoutContainer.appendChild(logoutLink);
-            listingContainer.appendChild(listingLink);
-        }else{
-          const logoutLink = document.createElement('a');
-          logoutLink.textContent = 'Login';
-          logoutLink.href = '#';
-          logoutLink.style.margin = '0 15px';
-          logoutLink.style.color = 'white';
-          logoutLink.style.textDecoration = 'none';
-          logoutLink.style.fontWeight = 'bold';
+        listingLink.onclick = function (e) {
+          e.preventDefault();
+          window.location.href = 'addListing.html';
+        };
 
-          logoutLink.onclick = function (e) {
-            e.preventDefault();
-            window.location.href = 'index.html'; 
-          };
+        logoutContainer.appendChild(logoutLink);
+        listingContainer.appendChild(listingLink);
+      } else {
+        const loginLink = document.createElement('a');
+        loginLink.textContent = 'Login';
+        loginLink.href = '#';
+        loginLink.style.margin = '0 15px';
+        loginLink.style.color = 'white';
+        loginLink.style.textDecoration = 'none';
+        loginLink.style.fontWeight = 'bold';
 
-          logoutContainer.appendChild(logoutLink);
-        }
+        loginLink.onclick = function (e) {
+          e.preventDefault();
+          window.location.href = 'index.html';
+        };
+
+        logoutContainer.appendChild(loginLink);
+      }
     }
 
     window.onload = checkUserAndShowLogout;
-  </script>  
+  </script>
 </body>
 </html>
