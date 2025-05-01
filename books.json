@@ -1,0 +1,68 @@
+[
+    {
+      "mainCategory": "For Sale",
+      "subCategory": "Books",
+      "Title": "To Kill a Mockingbird",
+      "Author": "Harper Lee",
+      "Genre": "Fiction",
+      "Condition": "Used - Good",
+      "Price": 7.99,
+      "Description": "Classic American novel in great shape.",
+      "City": "Ames",
+      "Phone number": "515-111-2222",
+      "imageUrl": "https://m.media-amazon.com/images/I/81Ox45z3XWL.jpg"
+    },
+    {
+      "mainCategory": "For Sale",
+      "subCategory": "Books",
+      "Title": "1984",
+      "Author": "George Orwell",
+      "Genre": "Dystopian",
+      "Condition": "Like New",
+      "Price": 6.50,
+      "Description": "Barely used paperback edition.",
+      "City": "Ames",
+      "Phone number": "515-222-3333",
+      "imageUrl": "https://m.media-amazon.com/images/I/71kxa1-0mfL.jpg"
+    },
+    {
+      "mainCategory": "For Sale",
+      "subCategory": "Books",
+      "Title": "Sapiens",
+      "Author": "Yuval Noah Harari",
+      "Genre": "History",
+      "Condition": "New",
+      "Price": 12.99,
+      "Description": "Brand new copy of the international bestseller.",
+      "City": "Ames",
+      "Phone number": "515-333-4444",
+      "imageUrl": "https://m.media-amazon.com/images/I/713jIoMO3UL.jpg"
+    },
+    {
+      "mainCategory": "For Sale",
+      "subCategory": "Books",
+      "Title": "Atomic Habits",
+      "Author": "James Clear",
+      "Genre": "Self-Help",
+      "Condition": "Used - Acceptable",
+      "Price": 5.00,
+      "Description": "Some notes inside, but in readable condition.",
+      "City": "Ames",
+      "Phone number": "515-444-5555",
+      "imageUrl": "https://m.media-amazon.com/images/I/91bYsX41DVL.jpg"
+    },
+    {
+      "mainCategory": "For Sale",
+      "subCategory": "Books",
+      "Title": "The Great Gatsby",
+      "Author": "F. Scott Fitzgerald",
+      "Genre": "Classic",
+      "Condition": "Used - Good",
+      "Price": 6.75,
+      "Description": "Penguin Classics edition.",
+      "City": "Ames",
+      "Phone number": "515-555-6666",
+      "imageUrl": "https://m.media-amazon.com/images/I/81af+MCATTL.jpg"
+    }
+  ]
+  

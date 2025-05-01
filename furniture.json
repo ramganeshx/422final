@@ -1,0 +1,68 @@
+[
+    {
+      "mainCategory": "For Sale",
+      "subCategory": "Furniture",
+      "Type": "Sofa",
+      "Color": "Gray",
+      "Material": "Fabric",
+      "Condition": "Used - Good",
+      "Price": 150,
+      "Description": "3-seater couch, pet-free home.",
+      "City": "Ames",
+      "Phone number": "515-777-8888",
+      "imageUrl": "https://www.ikea.com/us/en/images/products/klippan-loveseat-vissle-gray__0637839_pe698777_s5.jpg"
+    },
+    {
+      "mainCategory": "For Sale",
+      "subCategory": "Furniture",
+      "Type": "Dining Table",
+      "Color": "Brown",
+      "Material": "Wood",
+      "Condition": "Like New",
+      "Price": 220,
+      "Description": "Seats 6, barely used.",
+      "City": "Ames",
+      "Phone number": "515-888-9999",
+      "imageUrl": "https://www.ikea.com/us/en/images/products/lisabo-table-ash-veneer__0735885_pe740925_s5.jpg"
+    },
+    {
+      "mainCategory": "For Sale",
+      "subCategory": "Furniture",
+      "Type": "Office Chair",
+      "Color": "Black",
+      "Material": "Mesh",
+      "Condition": "Used - Good",
+      "Price": 45,
+      "Description": "Adjustable ergonomic chair.",
+      "City": "Ames",
+      "Phone number": "515-666-7777",
+      "imageUrl": "https://m.media-amazon.com/images/I/81W+6BFmr6L.jpg"
+    },
+    {
+      "mainCategory": "For Sale",
+      "subCategory": "Furniture",
+      "Type": "Bookshelf",
+      "Color": "White",
+      "Material": "Wood",
+      "Condition": "Used - Fair",
+      "Price": 30,
+      "Description": "5-shelf unit with minor scratches.",
+      "City": "Ames",
+      "Phone number": "515-777-1111",
+      "imageUrl": "https://www.ikea.com/us/en/images/products/billy-bookcase-white__0625599_pe692385_s5.jpg"
+    },
+    {
+      "mainCategory": "For Sale",
+      "subCategory": "Furniture",
+      "Type": "Bed Frame",
+      "Color": "Black",
+      "Material": "Metal",
+      "Condition": "Used - Excellent",
+      "Price": 80,
+      "Description": "Full-size frame, no mattress included.",
+      "City": "Ames",
+      "Phone number": "515-123-4567",
+      "imageUrl": "https://m.media-amazon.com/images/I/81HhD9h5y2L.jpg"
+    }
+  ]
+  
