@@ -11,7 +11,7 @@
       "Description": "Lightweight, great for beginners.",
       "City": "Ames",
       "Phone number": "515-111-2222",
-      "imageUrl": "https://example.com/motorcycle1.jpg"
+      "imageUrl": "https://www.centralfloridapowersports.com/cdn/shop/files/2024_Yamaha_YZF-R3_Supersport_Motorcycle_Central_Florida_PowerSports_16.png?v=1701130227"
     },
     {
       "mainCategory": "For Sale",
@@ -25,7 +25,7 @@
       "Description": "Agile and powerful.",
       "City": "Des Moines",
       "Phone number": "515-333-4444",
-      "imageUrl": "https://example.com/motorcycle2.jpg"
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLYQc5HnhsLEtDDw7De0oy_evFs5bTZUOwBw&s"
     },
     {
       "mainCategory": "For Sale",
@@ -39,36 +39,9 @@
       "Description": "Great mid-level bike.",
       "City": "Ames",
       "Phone number": "515-555-6666",
-      "imageUrl": "https://example.com/motorcycle3.jpg"
+      "imageUrl": "https://akcustomcycles.com/wp-content/uploads/2022/05/IMG_3332.jpg"
     },
-    {
-      "mainCategory": "For Sale",
-      "subCategory": "Motorcycles",
-      "Year Built": "2021",
-      "Make/Model": "Suzuki SV650",
-      "Color": "Black",
-      "Type": "Naked",
-      "Condition": "Used",
-      "Price": "6000",
-      "Description": "Reliable and smooth ride.",
-      "City": "Cedar Rapids",
-      "Phone number": "319-111-7777",
-      "imageUrl": "https://example.com/motorcycle4.jpg"
-    },
-    {
-      "mainCategory": "For Sale",
-      "subCategory": "Motorcycles",
-      "Year Built": "2022",
-      "Make/Model": "Harley Street 750",
-      "Color": "Gray",
-      "Type": "Cruiser",
-      "Condition": "New",
-      "Price": "7200",
-      "Description": "Classic cruiser bike.",
-      "City": "Iowa City",
-      "Phone number": "319-222-8888",
-      "imageUrl": "https://example.com/motorcycle5.jpg"
-    },
+    
     {
       "mainCategory": "For Sale",
       "subCategory": "Boats",
@@ -81,7 +54,7 @@
       "Description": "Perfect for weekend trips.",
       "City": "Ames",
       "Phone number": "515-999-0000",
-      "imageUrl": "https://example.com/boat1.jpg"
+      "imageUrl": "https://features.boats.com/boat-content/files/2002/10/img2842.jpg"
     },
     {
       "mainCategory": "For Sale",
@@ -95,7 +68,7 @@
       "Description": "Low hours, well maintained.",
       "City": "Des Moines",
       "Phone number": "515-101-2020",
-      "imageUrl": "https://example.com/boat2.jpg"
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkHYjMsvc5yCUat5ivNBq6KeIQr9juZkXlDA&s"
     },
     {
       "mainCategory": "For Sale",
@@ -109,7 +82,7 @@
       "Description": "Fun and fast.",
       "City": "Cedar Rapids",
       "Phone number": "319-303-4040",
-      "imageUrl": "https://example.com/boat3.jpg"
+      "imageUrl": "https://media.inventoryiq.io/prod/boat_models/630ce42fd16071933ea4976b/5935812_20160913071900281_1_XLARGE_fr77jg_cropped.webp"
     },
     {
       "mainCategory": "For Sale",
@@ -123,7 +96,7 @@
       "Description": "Spacious and stylish.",
       "City": "Ames",
       "Phone number": "515-505-6060",
-      "imageUrl": "https://example.com/boat4.jpg"
+      "imageUrl": "https://sdr.chaparralboats.com/images_inventory/21s_19/1500px/H20-21-S-Run-02-19.jpg"
     },
     {
       "mainCategory": "For Sale",
@@ -137,7 +110,7 @@
       "Description": "Ideal for fishing enthusiasts.",
       "City": "Iowa City",
       "Phone number": "319-707-8080",
-      "imageUrl": "https://example.com/boat5.jpg"
+      "imageUrl": "https://assets.wired2fish.com/uploads/2021/09/f798634b-0ebc-4c5f-aedb-3577036d4687.jpg"
     }
   ]
   
