@@ -13,16 +13,16 @@ app.use(cors());
 app.use(express.json()); // Add this to parse JSON bodies
 
 // Google Cloud Storage configuration
-const storage = new Storage();
-const bucketName = '422proj4-bucket'; // Replace with your Google Cloud Storage bucket name
+const storage = new Storage({ keyFilename: path.join(__dirname, 'key.json') });
+const bucketName = 'gallery-final-ramg-bucket'; // Replace with your Google Cloud Storage bucket name
 const bucket = storage.bucket(bucketName);
 
 // Create a connection pool to the database
 const pool = mysql.createPool({
-  user: 'root',
-  password: '422',
-  database: 'project4',
-  socketPath: `/cloudsql/proj4-456020:us-central1:quickstart-instance`,
+  user: 'galleryuser',
+  password: 'SecurePass123',
+  database: 'gallerydb',
+  socketPath: '/cloudsql/gallery-final-ram2025:us-central1:gallery-db'
 });
 
 // Setup Multer for memory storage (no filesystem storage)
@@ -88,7 +88,6 @@ app.post('/api/listing', upload.single('image'), async (req, res) => {
 
     blobStream.on('finish', async () => {
       try {
-        await blob.makePublic();
         const publicUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
         const { mainCategory: main, subCategory: sub } = jsonData;
 
