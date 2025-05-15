@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "gallery-final-ram2025",
+  "private_key_id": "9ee65eda9daaf1f5fd801b27d1972c2e7bb22f41",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCXUue63RvBDLCA\nK+6vftvwAQUdjpu3NhXRI6>
+  "client_email": "sql-accessor@gallery-final-ram2025.iam.gserviceaccount.com",
+  "client_id": "107563208626281892162",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/sql-accessor%40gallery-final-ram2025.iam.gserviceaccount.c>
+  "universe_domain": "googleapis.com"
+}
