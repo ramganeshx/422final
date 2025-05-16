@@ -1,13 +1,13 @@
 {
   "type": "service_account",
   "project_id": "gallery-final-ram2025",
-  "private_key_id": "3154fb9af556320765dc958fd9c05cd225f31e11",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCoErbbxH19S5Bl>
+  "private_key_id": "4fa99dfd11adfb6a2cdbbdd825b6f87b570a2a1e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCcZVLfUMbqXGWX\nHYIKUam70bfNHA3uKo1n1/1nqSKZUrjPlV6IUJjlsZOkW0vYSdnpFCs65dF3ZmZo\nKKKb0DVEnrnQowRBTpv0qo92tl2MNdIH8/ldetFVjG+WkozcQvI6EOUEthCQFsk2\nqmTQqBX1R/u5cG74f5kbLxo+ZZtlD2sNinb/YXBV2K+qruKqwEOSpcb1Kabh3NlO\nyKscopwxFgAZM5CJ7vc6bJJ9F6ejnoGRLCo7wLUgWBRh1HIaLEUMy6I9fPYR3V+H\nM8iVoehD8VIi/pkcvctMR5rPRSxcJbjkKdTKcoAGO78SdHzg7kIAa6weD4bZYPfp\nTfXmd8FDAgMBAAECggEAE18TgDibosy2Ap0zjb6mtO5Zg0zNxum7YRjmONBAylfu\nLzwTnPPKtGyl2m46ezxOgumuHxn3M4BZ/93EomMMLgcxAdAnR0WK2KfFpFEbTjIe\nZUDJatQ7GIsQCUj2rJOYOCv+ifJZI9fGrYA2g4fGTH7RhZsRC7OWTcEsUX05Xa91\nHheF/lI01XctKflcIdpJqnDo1pAj8Uxqw3a++j4HmXq4bK7YSxie18lQB9+8Rb0t\n7tHJ/co/X/KLDto0qWm8QSupjZ9536aCn2n6wsY5KKVOwDPrirALwui3QjTvtA/o\nLpiwrOVDS1WtqgApoRVQLF4SUzNpTur9i/P3OH10hQKBgQDOVLQM1/ff8is96Lsj\nVro62SRPxpXivhwlP6Or+8oCN3+1zcU1bQCxaYmFhZx6hkbnxP3hP4FEospObUed\npORiVagH2wh+hP0gIqQ6oXZ1sCW9wwsmRu5w32hLvnmnIaTNUMhY/+NiJgibtRcz\nO+QAo/vWt0Wz8gQuAxHteoFd5wKBgQDCC1VY/LCATNg0RZoNqK/HxHJVuOX3d71b\nxo/wkw5wlSXlZUxsTWvarDBeb6jWP08QjKifUJnpzm65oK94/2ZEGp/h7r7YviPe\no+o7qpA1sxzCMoxg6zyJBbdUpmpLmFZ+2jt1FkPdKMBD78OCl6eNhEqpUft+eCd+\nGjj35di+RQKBgGeUVh7sfF9MLzERGIERFMReJcB2rN/7GB4K6Jt591tNiSs3dXzw\nj5yAoq0I+hj4N7g6SEk/nCFcp7rfWUhmctB6t7PZ3VXGZVwwh8l3LQS/vPKaa4p3\nqVO4k58Sq/efCCCaITmsm/W1qjSgoFj0A+3eZJrRvogrQrXmjKVvDmqZAoGAQL6d\nVJrDnZuGTDKpC0OsmyAd8iJGgQKv6O5g2qmGmOP7CAZ7sGtIwGbRoMDq+cmX7PKx\n1K6FHHEnmsJVqi61haXIkQ8jGJigyUmx/wSTJ4fC4b0R/8idoy6IFDOOpfiHa74P\nNqseK63MMR7QAkPtwRdR/hr/qhwXOUkwlu5XGm0CgYEAy2EvB4s45lnvfsxpQArK\nHYbGOUkacIR7Gr7AQsS1Fy5Ju/S5rj8sWEYq/r7yJBs5Ttjoqknez3b2Fwvzxibq\nlEC8oww4RgZl5KW1TuxTdIen/qiQREflxXXo8858uTX3R8nznAq36KsgjoljXgub\nWYL6qXkJu7GHWwUrU4UmsdY=\n-----END PRIVATE KEY-----\n",
   "client_email": "sql-accessor@gallery-final-ram2025.iam.gserviceaccount.com",
   "client_id": "107563208626281892162",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
   "token_uri": "https://oauth2.googleapis.com/token",
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/sql-accessor%40gallery-final-ram20>
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/sql-accessor%40gallery-final-ram2025.iam.gserviceaccount.com",
   "universe_domain": "googleapis.com"
 }
