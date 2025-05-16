@@ -202,7 +202,8 @@
           }
 
           filtered.forEach(listing => {
-            container.append(makeItem(JSON.parse(listing.json), listing.imageUrl));
+container.append(makeItem(listing.json, listing.imageUrl));
+
           });
         }
       }
