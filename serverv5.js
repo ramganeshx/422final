@@ -161,4 +161,4 @@ app.get("/", (req, res) => {
 
 // Start Server
 const PORT = 8080;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => console.log(`Server running on port ${PORT}`));
